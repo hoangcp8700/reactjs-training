@@ -18,11 +18,11 @@ const Loading: React.FC<LoadingProps> = ({ fullScreen, isOverlay }) => (
   >
     <div className={styles.wrapSpinner}>
       <div className={styles.spinner}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
       </div>
     </div>
   </div>

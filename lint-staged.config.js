@@ -7,7 +7,4 @@ module.exports = {
     `yarn eslint --fix ${filenames.join(" ")}`,
     `yarn prettier --write ${filenames.join(" ")}`,
   ],
-  "src/**/*.scss": (filenames) => [
-    `yarn lint:style --fix ${filenames.join(" ")}`,
-  ],
 };
