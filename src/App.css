@@ -1,0 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* The Base: can be considered the layer for defining base styles, such as font-families, line-heights, heading margins, letter spacings, input placeholder colours etc. */
+/* The Components: is the layer that defines styles for reusable widget components. It touches multiple CSS properties and states or behaviours such as hover states, etc. */
+/* The Utility Layer should be imported last so that it is possible to override a component style using a utility style. */
