@@ -12,6 +12,7 @@ export interface RoutePathItemProps {
   paths: string[];
   component: React.LazyExoticComponent<React.ComponentType<any>>;
   private: boolean;
+  authenticate?: boolean;
 }
 // eg: ['about-us', 've-chung-toi']
 const TEMPLATE_PAGE: RoutePathItemProps[] = [
@@ -20,8 +21,18 @@ const TEMPLATE_PAGE: RoutePathItemProps[] = [
     component: AboutUs,
     private: false,
   },
-  { paths: [CONSTANT_ROUTE.EN.LOGIN, CONSTANT_ROUTE.VI.LOGIN], component: Login, private: false },
-  { paths: [CONSTANT_ROUTE.EN.CART, CONSTANT_ROUTE.VI.CART], component: Cart, private: true },
+  {
+    paths: [CONSTANT_ROUTE.EN.LOGIN, CONSTANT_ROUTE.VI.LOGIN],
+    component: Login,
+    private: false,
+    authenticate: true,
+  },
+  {
+    paths: [CONSTANT_ROUTE.EN.CART, CONSTANT_ROUTE.VI.CART],
+    component: Cart,
+    private: true,
+    authenticate: true,
+  },
   {
     paths: [CONSTANT_ROUTE.EN.NEWS_DETAIL, CONSTANT_ROUTE.VI.NEWS_DETAIL],
     component: NewsDetail,
