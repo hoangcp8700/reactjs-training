@@ -7,6 +7,7 @@ import { IMAGE_DUMMY } from "utils/constants";
 import Checkbox from "components/atoms/Checkbox";
 import Input from "components/atoms/Input";
 import Link from "components/atoms/Link";
+import Radio from "components/atoms/Radio";
 
 const Home: React.FC = () => {
   const [checked, setChecked] = useState(false);
@@ -21,15 +22,19 @@ const Home: React.FC = () => {
           <Text className='text-white'>Button component</Text>
         </Button>
         <p> to ReactJS</p>
-        <Link
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
+        <Link href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
           Learn React
         </Link>
         <Checkbox id='gender' checked={checked} onChange={() => setChecked(!checked)} />
         <Input id='gender1' placeholder='test' error='error' isSearch />
+        <Radio id='gender2' checked={checked} onChange={() => setChecked(!checked)} />
+        <Radio
+          id='gender2'
+          checked={!checked}
+          onChange={() => setChecked(!checked)}
+          error
+          sizes='md'
+        />
       </header>
     </div>
   );

@@ -12,7 +12,7 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const CheckboxRef: React.ForwardRefRenderFunction<HTMLInputElement, CheckboxProps> = (
-  { label, isLabelLeft, error, disabled, checked, sizes = "sm", onChange, ...props },
+  { label, isLabelLeft, error, disabled, checked, sizes = "sm", onChange = () => {}, ...props },
   ref,
 ) => (
   <div
@@ -22,7 +22,7 @@ const CheckboxRef: React.ForwardRefRenderFunction<HTMLInputElement, CheckboxProp
       error && "text-red-500",
       disabled && "text-gray-500 pointer-events-none",
     )}
-    onClick={() => onChange && onChange()}
+    onClick={onChange}
   >
     {label && isLabelLeft && <span className='text-base text-inherit ml-2'>{label}</span>}
 
@@ -40,7 +40,7 @@ const CheckboxRef: React.ForwardRefRenderFunction<HTMLInputElement, CheckboxProp
       )}
       disabled={disabled}
       checked={checked}
-      onChange={() => onChange && onChange()}
+      onChange={onChange}
       {...props}
     />
     {label && !isLabelLeft && <span className='text-base text-inherit ml-2'>{label}</span>}
