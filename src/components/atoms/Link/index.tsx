@@ -8,11 +8,7 @@ export interface LinkProps extends Omit<RouterLinkProps, "to"> {
 }
 
 const Link: React.FC<LinkProps> = ({ children, href, search, useExternal, ...props }) => {
-  const style = useMemo(
-    () =>
-      "underline decoration-transparent hover:decoration-inherit transition duration-300 ease-in-out",
-    [],
-  );
+  const style = useMemo(() => "underline decoration-transparent", []);
   if (!href) return <span {...props}>{children}</span>;
 
   if (href.includes("http") || useExternal) {

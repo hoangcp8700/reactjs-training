@@ -10,6 +10,7 @@ import Link from "components/atoms/Link";
 import Radio from "components/atoms/Radio";
 import Select from "components/atoms/Select";
 import TextArea from "components/atoms/TextArea";
+import Card from "components/molecules/Card";
 
 const dataSelectDummy = new Array(10).fill(true).map((_, idx) => ({
   id: (idx + 1).toString(),
@@ -63,6 +64,26 @@ const Home: React.FC = () => {
           handleLoadMore={() => dataSelect.length < 31 && handleLoadMore()}
         />
         <TextArea id='test' name='descriptiop' placeholder='12321' label='tesT' />
+        <div style={{ maxWidth: 300 }}>
+          <Card.Product
+            thumbnail={{
+              alt: "card",
+              src: IMAGE_DUMMY,
+            }}
+            title={{
+              text: "New Balance 67/212 Men's Sneakers - Mindful Grey New Balance 67/212 Men's Sneakers",
+              url: "/",
+              target: "_self",
+            }}
+            sales={[
+              { label: "Giảm 30%" },
+              { label: "Free ship", style: { background: "#fafa", color: "#000" } },
+            ]}
+            price={500000}
+            originPrice={1000000}
+            handleFavorite={() => console.log("favorite")}
+          />
+        </div>
       </header>
     </div>
   );

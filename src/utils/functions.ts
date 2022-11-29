@@ -2,6 +2,14 @@ export function baseStr(text?: string) {
   return text || "";
 }
 
+export function baseSlug(slug: string, isAuth?: boolean) {
+  if (isAuth) {
+    // return `/auth/${slug}`;
+    return `/${slug}`;
+  }
+  return `/${slug}`;
+}
+
 export function renderMoney(val?: number, prefix?: string, unit?: string) {
   const converted = val?.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, prefix || ".");
   return unit ? `${converted} ${unit}` : converted;

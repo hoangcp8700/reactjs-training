@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
 const percentageWidth = require('tailwindcss-percentage-width');
+
 module.exports = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
@@ -43,8 +45,29 @@ module.exports = {
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
-    require("@tailwindcss/line-clamp"),
-    require("@tailwindcss/aspect-ratio"),
-    percentageWidth
+    require("@tailwindcss/line-clamp"), // use to truncate text to a fixed number of lines.
+    require("@tailwindcss/aspect-ratio"), // give an element a fixed aspect ratio.
+    percentageWidth,
+    plugin(function ({ addUtilities, addBase, theme, addVariant, e }) {
+      // registering new base styles
+      addBase({
+        'h1': { fontSize: theme('fontSize.2xl') },
+        'h2': { fontSize: theme('fontSize.xl') },
+        'h3': { fontSize: theme('fontSize.lg') },
+      })
+      // registering new static utility styles
+      addUtilities({
+        '.adjust-flex-center': {
+          'display': 'flex',
+          'justify-content': 'center',
+          'align-items': 'center',
+        },
+      })
+
+      // registering custom variants
+      addVariant('hocus', ['&:hover', '&:focus'])
+      addVariant('not-last', '&:not(:last-child)')
+      addVariant('not-first', '&:not(:first-child)')
+    })
   ],
 }

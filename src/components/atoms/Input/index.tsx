@@ -18,7 +18,7 @@ const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 ) => (
   <div className='relative'>
     {label && (
-      <div className='text-base text-black mb-2'>
+      <div className='text-base text-white mb-2'>
         <label htmlFor={id}>{label}</label>
         {required && <span className='ml-1 text-red-500 font-medium'>*</span>}
       </div>
@@ -29,9 +29,9 @@ const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         type={type}
         className={clsx(
           STYLES.MIXINS.resetInput,
-          "m-0 block text-base font-normal text-gray-700 bg-white bg-clip-border border border-solid !border-gray-300 placeholder:text-gray-400 transition-all w-full rounded-sm px-3 py-2 focus:text-gray-700 focus:bg-white focus:border-blue-600",
+          "m-0 block text-base font-normal text-gray-600 bg-white bg-clip-border border border-solid !border-gray-300 placeholder:text-gray-400 transition-all w-full rounded-lg px-3 py-2 focus:text-gray-700 focus:bg-white focus:border-blue-600",
           isSearch && "pr-12",
-          error && "!text-red-500 !border-red-700",
+          error && "!text-red-500 !border-red-500",
           disabled && "cursor-not-allowed opacity-50",
         )}
         disabled={disabled}

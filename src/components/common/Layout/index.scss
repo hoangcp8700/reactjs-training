@@ -1,6 +1,0 @@
-main {
-  padding-top: rem($header-height-desktop);
-  @include tablet-down {
-    padding-top: rem($header-height-tablet);
-  }
-}

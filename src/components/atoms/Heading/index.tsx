@@ -9,7 +9,10 @@ interface HeadingProps {
 }
 const Heading: React.FC<HeadingProps> = ({ type = "h2", children, content, className }) => {
   const Element = type;
-  const styleDefault = useMemo(() => "font-medium m-0 leading-tight test-3xl sm:text-5xl", []);
+  const styleDefault = useMemo(
+    () => "font-medium m-0 leading-tight test-3xl sm:text-5xl duration-300 ease",
+    [],
+  );
 
   return content ? (
     <Element

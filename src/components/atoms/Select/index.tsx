@@ -104,7 +104,7 @@ const Select: React.FC<SelectProps> = ({
   return (
     <div className='relative' ref={pulldownRef}>
       {label && (
-        <div className='text-base text-black mb-2'>
+        <div className='text-base text-white mb-2'>
           <label htmlFor={id}>{label}</label>
           {required && <span className='ml-1 text-red-500 font-medium'>*</span>}
         </div>
@@ -112,7 +112,7 @@ const Select: React.FC<SelectProps> = ({
       <div
         aria-hidden
         className={clsx(
-          "m-0 relative py-2 px-3 border rounded-sm border-gray-300 transition-all focus:bg-white focus:border-blue-600",
+          "m-0 relative py-2 px-3 border rounded-lg border-gray-300 transition-all focus:bg-white focus:border-blue-600",
           error && "border border-red-500 text-red-500",
           disabled && "pointer-events-none cursor-not-allowed bg-gray-100 opacity-50",
           isOpen ? "bg-gray-100 rounded-t-md" : "shadow-md rounded-md",

@@ -4,8 +4,18 @@ import clsx from "clsx";
 import STYLES from "styles";
 import styled from "@emotion/styled";
 
-import { ImageProps, ImageWrapperStyleProps } from "./type";
+export type ImageWrapperStyleProps = {
+  ratio?: [number, number]; // [width, height] => [4,3]
+};
 
+export type ImageProps = ImageWrapperStyleProps &
+  ImageType & {
+    loading?: "lazy" | "eager" | undefined;
+    classNameWrapper?: string;
+    className?: string;
+  };
+
+// style
 const ImageWrapper = styled.div<ImageWrapperStyleProps>((props) => ({
   paddingBottom: props?.ratio
     ? STYLES.MIXINS.aspectRatio(props?.ratio[0], props?.ratio[1])
@@ -36,16 +46,16 @@ const Image: React.FC<ImageProps> = ({
   return (
     <ImageWrapper
       ratio={ratio}
-      className={clsx(
-        "relative block overflow-hidden w-full ease-in-out duration-300",
-        classNameWrapper,
-      )}
+      className={clsx("relative block overflow-hidden w-full", classNameWrapper)}
     >
       <img
         src={sourceImage}
         alt={alt}
         loading={loading}
-        className={clsx("absolute h-full w-full left-0 top-0 object-cover", className)}
+        className={clsx(
+          "absolute h-full w-full left-0 top-0 object-cover transition ease-in-out duration-300",
+          className,
+        )}
       />
     </ImageWrapper>
   );

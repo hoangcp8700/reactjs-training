@@ -22,16 +22,16 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   fullWidth,
   className,
+  ...props
 }) => (
   <button
     type={type || "button"}
     className={clsx(
-      "relative flex items-center justify-items-center overflow-hidden text-base leading-tight transition-all px-5 sm:px-8 rounded-md shadow-lg disabled:cursor-not-allowed disabled:opacity-70 focus:ring-0",
+      "relative flex adjust-flex-center overflow-hidden text-base leading-tight transition-all px-5 sm:px-8 rounded-md shadow-lg disabled:cursor-not-allowed disabled:opacity-70 focus:ring-0",
       STYLES.MIXINS.resetButton,
       variants === "default" && "bg-gray-200 shadow-primary hover:shadow-primaryInner",
-      variants === "primary" &&
-        "bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800",
-      variants === "secondary" && "bg-red-500 hover:bg-red-700 focus:bg-red-700 active:bg-red-800",
+      variants === "primary" && "bg-blue-500 hocus:bg-blue-700 active:bg-blue-800",
+      variants === "secondary" && "bg-red-500 hocus:bg-red-700  active:bg-red-800",
       variants === "contained" && "rounded-none",
       variants === "outlined" && "border border-gray-200",
       size === "lg" && "h-[48px] sm:h-[56px]",
@@ -41,6 +41,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled && "pointer-events-none bg-gray-300 shadow-inner text-gray-500",
       className,
     )}
+    {...props}
   >
     {children}
     {loading && (

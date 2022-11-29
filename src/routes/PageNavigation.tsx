@@ -6,7 +6,8 @@ import Loading from "components/atoms/Loading";
 import TEMPLATE_PAGE, { RoutePathItemProps } from "./paths";
 import { CONSTANT_ROUTE } from "./constants";
 
-const isAuth = true;
+// NOTE: important!!!
+const isAuth = false;
 const langCurrent = "VI";
 
 const PageNavigation: React.FC = () => {

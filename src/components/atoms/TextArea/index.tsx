@@ -14,7 +14,7 @@ const TextAreaRef: React.ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaP
 ) => (
   <div className='relative'>
     {label && (
-      <div className='text-base text-black mb-2'>
+      <div className='text-base text-white mb-2'>
         <label htmlFor={id}>{label}</label>
         {required && <span className='ml-1 text-red-500 font-medium'>*</span>}
       </div>
@@ -24,7 +24,7 @@ const TextAreaRef: React.ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaP
         ref={ref}
         className={clsx(
           STYLES.MIXINS.resetInput,
-          "bg-white bg-clip-border border border-solid !border-gray-300 resize-none w-full rounded-sm p-3 focus:border-blue-600",
+          "bg-white bg-clip-border border border-solid !border-gray-300 resize-none w-full rounded-lg p-3 focus:border-blue-600",
           disabled && "cursor-not-allowed opacity-50",
           className,
         )}
