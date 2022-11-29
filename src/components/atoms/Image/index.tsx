@@ -1,9 +1,16 @@
 import React, { useMemo } from "react";
 import useDeviceQueries from "hooks/useDeviceQueries";
 import clsx from "clsx";
+import STYLES from "styles";
+import styled from "@emotion/styled";
 
-import { ImageProps } from "./type";
-import ImageWrapper from "./style";
+import { ImageProps, ImageWrapperStyleProps } from "./type";
+
+const ImageWrapper = styled.div<ImageWrapperStyleProps>((props) => ({
+  paddingBottom: props?.ratio
+    ? STYLES.MIXINS.aspectRatio(props?.ratio[0], props?.ratio[1])
+    : "100%",
+}));
 
 const Image: React.FC<ImageProps> = ({
   src = "",

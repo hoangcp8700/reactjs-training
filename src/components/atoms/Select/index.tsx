@@ -1,23 +1,24 @@
 import clsx from "clsx";
 import React, { useCallback, useMemo, useRef, useState } from "react";
-
 import useClickOutside from "hooks/useClickOutside";
 import useScrollInfinite from "hooks/useScrollInfinite";
+import { removeAccents } from "utils/functions";
+import STYLES from "styles";
+import useDebounce from "hooks/useDebounce";
 
 import Icon from "../Icon";
-import { removeAccents } from "utils/functions";
 
 interface SelectProps {
   id?: string;
   error?: string;
   label?: string;
   name?: string;
-  optionData?: OptionType[];
+  optionData: OptionType[];
   option?: OptionType;
   placeholder: string;
   disabled?: boolean;
   isSearch?: boolean;
-  isLoading: boolean;
+  isLoading?: boolean;
   required?: boolean;
   noOptionMessage?: string;
   handleLoadMore?: () => void;
@@ -43,32 +44,42 @@ const Select: React.FC<SelectProps> = ({
   const pulldownRef = useRef<HTMLDivElement>(null);
   const [txtSearch, setTxtSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isDebounceSearch, setIsDebounceSearch] = useState(false);
   const { setNode } = useScrollInfinite(handleLoadMore);
 
   useClickOutside(pulldownRef, () => {
     if (isOpen) setIsOpen(false);
   });
 
-  const toggling = useCallback(() => setIsOpen(!isOpen), [isOpen]);
+  const handleToggling = useCallback(() => setIsOpen(!isOpen), [isOpen]);
+
   const handleChangeTxt = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => setTxtSearch(e.currentTarget.value),
-    [txtSearch],
+    (e: React.FormEvent<HTMLInputElement>) => {
+      setTxtSearch(e.currentTarget.value);
+      // debounce search when onChange
+      if (isSearch && !isDebounceSearch) {
+        setIsDebounceSearch(true);
+      }
+    },
+    [isSearch, isDebounceSearch],
   );
 
   const handleClickOption = useCallback(
     (value: OptionType) => {
       if (handleSelect) {
+        if (isSearch) {
+          setTxtSearch(value.label);
+        }
         handleSelect(value);
-        setTxtSearch("");
         setIsOpen(false);
       }
     },
-    [isOpen, txtSearch],
+    [handleSelect, isSearch],
   );
 
   const mappingFunc = useCallback(
     (data: OptionType[]) => {
-      if (isSearch) {
+      if (isSearch && !isDebounceSearch) {
         return data.filter(
           (item) =>
             removeAccents(item.label)
@@ -78,8 +89,11 @@ const Select: React.FC<SelectProps> = ({
       }
       return data;
     },
-    [txtSearch, isSearch],
+    [isDebounceSearch, txtSearch, isSearch],
   );
+
+  // debounce search list
+  useDebounce(() => setIsDebounceSearch(false), 300, [txtSearch]);
 
   const styles = useMemo(
     () => ({
@@ -87,7 +101,6 @@ const Select: React.FC<SelectProps> = ({
     }),
     [],
   );
-
   return (
     <div className='relative' ref={pulldownRef}>
       {label && (
@@ -97,13 +110,14 @@ const Select: React.FC<SelectProps> = ({
         </div>
       )}
       <div
+        aria-hidden
         className={clsx(
-          "relative pl-5 py-3 pr-3 transition-shadow focus:shadow-primaryInner",
+          "m-0 relative py-2 px-3 border rounded-sm border-gray-300 transition-all focus:bg-white focus:border-blue-600",
           error && "border border-red-500 text-red-500",
-          disabled && "pointer-events-none bg-gray-100",
-          isOpen ? "shadow-primaryInner rounded-t-md" : "shadow-md rounded-md",
+          disabled && "pointer-events-none cursor-not-allowed bg-gray-100 opacity-50",
+          isOpen ? "bg-gray-100 rounded-t-md" : "shadow-md rounded-md",
         )}
-        onClick={!disabled ? toggling : () => undefined}
+        onClick={!disabled ? handleToggling : () => undefined}
       >
         {!isSearch ? (
           <div className={clsx("flex items-center justify-between text-inherit")}>
@@ -111,49 +125,52 @@ const Select: React.FC<SelectProps> = ({
               {option?.label || placeholder}
             </span>
             <span className={clsx(!isOpen ? "rotate-180" : "rotate-0", " transition-transform")}>
-              <Icon iconName='arrowUp' size='16' className={error && "fill-red-500"} />
+              <Icon iconName='arrowUp' size={16} className={error && "fill-red-500"} />
             </span>
           </div>
         ) : (
           <input
             name={name}
-            className={clsx("bg-transparent w-full text-base")}
+            className={clsx(
+              STYLES.MIXINS.resetInput,
+              "bg-transparent w-full text-base font-normal placeholder:text-gray-400",
+            )}
             value={txtSearch}
+            onKeyDown={(e) => e.code === "Enter" && handleToggling()}
             onChange={handleChangeTxt}
             disabled={disabled}
             placeholder={placeholder}
           />
         )}
       </div>
-      {
-        <div
-          className={clsx(
-            "absolute w-full z-3 rounded-b-md overflow-hidden transition-all",
-            isOpen && !disabled ? "max-h-96 opacity-100 visible" : "max-h-0 opacity-100 invisible",
-          )}
-        >
-          <ul className='bg-white shadow-primary overflow-y-auto max-h-80'>
-            {optionData?.length ? (
-              mappingFunc(optionData).map((ele, index) => (
-                <li
-                  key={`${ele?.id}-${index.toString()}`}
-                  className={clsx(styles.li, ele?.value === option?.value && "bg-black-100")}
-                  onClick={() => handleClickOption(ele)}
-                >
-                  {ele.label}
-                </li>
-              ))
-            ) : (
-              <li className={styles.li}>{noOptionMessage}</li>
-            )}
-            {handleLoadMore && (
-              <li className='flex justify-center py-3' ref={(suggest) => setNode(suggest)}>
-                {isLoading && <Icon iconName='loading' size='64' />}
+      <div
+        className={clsx(
+          "absolute w-full z-3 rounded-b-md overflow-hidden transition-all",
+          isOpen && !disabled ? "max-h-96 opacity-100 visible" : "max-h-0 opacity-100 invisible",
+        )}
+      >
+        <ul className='bg-white shadow-primary overflow-y-auto max-h-72'>
+          {optionData?.length ? (
+            mappingFunc(optionData).map((ele, index) => (
+              <li
+                key={`${ele?.id}-${index.toString()}`}
+                className={clsx(styles.li, ele?.value === option?.value && "bg-black-100")}
+                onClick={() => handleClickOption(ele)}
+                aria-hidden
+              >
+                {ele.label}
               </li>
-            )}
-          </ul>
-        </div>
-      }
+            ))
+          ) : (
+            <li className={styles.li}>{noOptionMessage}</li>
+          )}
+          {handleLoadMore && (
+            <li className='flex justify-center py-1.5' ref={(suggest) => setNode(suggest)}>
+              {isLoading && <Icon iconName='loading' size={40} />}
+            </li>
+          )}
+        </ul>
+      </div>
       {error && (
         <div className='mt-1 ml-2'>
           <span className='text-sm text-red-500'>{error}</span>

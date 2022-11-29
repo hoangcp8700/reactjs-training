@@ -8,10 +8,27 @@ import Checkbox from "components/atoms/Checkbox";
 import Input from "components/atoms/Input";
 import Link from "components/atoms/Link";
 import Radio from "components/atoms/Radio";
+import Select from "components/atoms/Select";
+
+const dataSelectDummy = new Array(10).fill(true).map((_, idx) => ({
+  id: (idx + 1).toString(),
+  value: (idx + 11).toString(),
+  label: `value ${idx + 11} ${Math.floor(Math.random() * 1000)}`,
+}));
 
 const Home: React.FC = () => {
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [select, setSelect] = useState<OptionType>();
+  const [dataSelect, setDataSelect] = useState<OptionType[]>(dataSelectDummy);
 
+  const handleLoadMore = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setDataSelect((prev) => [...prev, ...dataSelectDummy]);
+      setLoading(false);
+    }, 5000);
+  };
   return (
     <div className='App'>
       <header className='App-header'>
@@ -34,6 +51,15 @@ const Home: React.FC = () => {
           onChange={() => setChecked(!checked)}
           error
           sizes='md'
+        />
+        <Select
+          option={select}
+          optionData={dataSelect}
+          placeholder='chon di'
+          handleSelect={(value) => setSelect(value)}
+          isSearch
+          isLoading={loading}
+          handleLoadMore={() => dataSelect.length < 31 && handleLoadMore()}
         />
       </header>
     </div>

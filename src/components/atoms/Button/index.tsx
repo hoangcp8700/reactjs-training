@@ -45,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({
     {children}
     {loading && (
       <div className='ml-2'>
-        <Icon iconName='loading' size='18' />
+        <Icon iconName='loading' size={18} />
       </div>
     )}
   </button>

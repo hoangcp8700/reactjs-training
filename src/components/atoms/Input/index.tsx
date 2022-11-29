@@ -40,7 +40,7 @@ const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       {isSearch && (
         <div className='absolute -top-1 right-0 translate-y-2/4 -translate-x-2/4'>
           <button type='submit'>
-            <Icon iconName='search' size='24' />
+            <Icon iconName='search' size={24} />
           </button>
         </div>
       )}

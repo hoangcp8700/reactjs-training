@@ -1,42 +1,32 @@
-import React from "react";
+import React, { useMemo } from "react";
+import styled from "@emotion/styled";
 
 import ICON_LISTS from "./constants";
 
-export type IconSize =
-  | "10"
-  | "14"
-  | "16"
-  | "18"
-  | "20"
-  | "24"
-  | "28"
-  | "32"
-  | "36"
-  | "64"
-  | "72"
-  | "80";
-
-interface IconProps {
+interface IconStyleProps {
+  size?: number;
+}
+interface IconProps extends IconStyleProps {
   iconName: IconName;
-  size?: IconSize;
   className?: string;
 }
 
 export type IconName = keyof typeof ICON_LISTS;
 
-const Icon: React.FC<IconProps> = ({ iconName, size = "24", className }) => {
-  const Component = ICON_LISTS[iconName] as React.ElementType<React.ComponentPropsWithRef<"svg">>;
-  return <Component className={className} style={{ fontSize: size, width: size, height: size }} />;
+const Icon: React.FC<IconProps> = ({ iconName, size = 24, className }) => {
+  const Component = useMemo(() => ICON_LISTS[iconName], [iconName]);
+
+  const IconWrapper = styled(Component)<IconStyleProps>(
+    (props) =>
+      props?.size && {
+        fontSize: props?.size,
+        width: props?.size,
+        height: props?.size,
+      },
+  );
+  return (
+    <IconWrapper className={className} style={{ fontSize: size, width: size, height: size }} />
+  );
 };
 
 export default Icon;
-
-// Storybook
-// argTypes: {
-//     size: {
-//       control: {
-//         type: 'select',
-//         options: ['10', '14', '16', '20', '24', '32'],
-//       },
-//       defaultValue: '24',
-//     },
