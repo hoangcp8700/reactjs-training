@@ -40,6 +40,7 @@ const CheckboxRef: React.ForwardRefRenderFunction<HTMLInputElement, CheckboxProp
       )}
       disabled={disabled}
       checked={checked}
+      onChange={() => onChange && onChange()}
       {...props}
     />
     {label && !isLabelLeft && <span className='text-base text-inherit ml-2'>{label}</span>}

@@ -5,6 +5,7 @@ import Button from "components/atoms/Button";
 import Image from "components/atoms/Image";
 import { IMAGE_DUMMY } from "utils/constants";
 import Checkbox from "components/atoms/Checkbox";
+import Input from "components/atoms/Input";
 
 const Home: React.FC = () => {
   const [checked, setChecked] = useState(false);
@@ -28,6 +29,7 @@ const Home: React.FC = () => {
           Learn React
         </a>
         <Checkbox id='gender' checked={checked} onChange={() => setChecked(!checked)} />
+        <Input id='gender1' placeholder='test' error='error' isSearch />
       </header>
     </div>
   );

@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import React, { forwardRef } from "react";
+import STYLES from "styles";
 
 import Icon from "../Icon";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: "text" | "number" | "email" | "password";
-  // modifiers?: "primary"; // style
   id: string;
   label?: string;
   error?: string;
@@ -28,9 +28,10 @@ const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         ref={ref}
         type={type}
         className={clsx(
-          "placeholder:text-slate-400 text-black transition-shadow w-full rounded-md pl-5 py-3 pr-3 shadow-primary focus:shadow-primaryInner active:shadow-primaryInner",
+          STYLES.MIXINS.resetInput,
+          "m-0 block text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid !border-gray-300 placeholder:text-gray-400 transition-all w-full rounded-sm px-3 py-2 focus:text-gray-700 focus:bg-white focus:border-blue-600",
           isSearch && "pr-12",
-          error && "text-red-500 placeholder:text-red-400",
+          error && "!text-red-500 !border-red-700",
           disabled && "cursor-not-allowed opacity-50",
         )}
         disabled={disabled}
