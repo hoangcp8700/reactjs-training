@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { NavLink as RouterLink, LinkProps as RouterLinkProps } from "react-router-dom";
 
 export interface LinkProps extends Omit<RouterLinkProps, "to"> {
@@ -8,11 +8,16 @@ export interface LinkProps extends Omit<RouterLinkProps, "to"> {
 }
 
 const Link: React.FC<LinkProps> = ({ children, href, search, useExternal, ...props }) => {
+  const style = useMemo(
+    () =>
+      "underline decoration-transparent hover:decoration-inherit transition duration-300 ease-in-out",
+    [],
+  );
   if (!href) return <span {...props}>{children}</span>;
 
   if (href.includes("http") || useExternal) {
     return (
-      <a {...props} href={href} rel='noreferrer'>
+      <a {...props} href={href} rel='noreferrer' className={style}>
         {children}
       </a>
     );
@@ -21,6 +26,7 @@ const Link: React.FC<LinkProps> = ({ children, href, search, useExternal, ...pro
   return (
     <RouterLink
       {...props}
+      className={style}
       to={{
         pathname: href,
         search,

@@ -6,6 +6,7 @@ import Image from "components/atoms/Image";
 import { IMAGE_DUMMY } from "utils/constants";
 import Checkbox from "components/atoms/Checkbox";
 import Input from "components/atoms/Input";
+import Link from "components/atoms/Link";
 
 const Home: React.FC = () => {
   const [checked, setChecked] = useState(false);
@@ -20,14 +21,13 @@ const Home: React.FC = () => {
           <Text className='text-white'>Button component</Text>
         </Button>
         <p> to ReactJS</p>
-        <a
-          className='App-link'
+        <Link
           href='https://reactjs.org'
           target='_blank'
           rel='noopener noreferrer'
         >
           Learn React
-        </a>
+        </Link>
         <Checkbox id='gender' checked={checked} onChange={() => setChecked(!checked)} />
         <Input id='gender1' placeholder='test' error='error' isSearch />
       </header>
