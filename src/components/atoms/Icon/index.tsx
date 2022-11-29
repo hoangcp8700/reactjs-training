@@ -26,12 +26,9 @@ export type IconName = keyof typeof ICON_LISTS;
 
 const Icon: React.FC<IconProps> = ({ iconName, size = "24", className }) => {
   const Component = ICON_LISTS[iconName] as React.ElementType<React.ComponentPropsWithRef<"svg">>;
-  return (
-    <span>
-      <Component className={className} style={{ fontSize: size, width: size, height: size }} />
-    </span>
-  );
+  return <Component className={className} style={{ fontSize: size, width: size, height: size }} />;
 };
+
 export default Icon;
 
 // Storybook

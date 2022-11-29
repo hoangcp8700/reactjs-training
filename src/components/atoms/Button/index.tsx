@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import clsx from "clsx";
 import React from "react";
 import STYLES from "styles";
@@ -23,14 +24,14 @@ const Button: React.FC<ButtonProps> = ({
   className,
 }) => (
   <button
-    // eslint-disable-next-line react/button-has-type
     type={type || "button"}
     className={clsx(
-      "relative flex items-center justify-items-center overflow-hidden text-base transition-all outline-none px-5 sm:px-8 rounded-md shadow-lg disabled:cursor-not-allowed disabled:opacity-70",
+      "relative flex items-center justify-items-center overflow-hidden text-base leading-tight transition-all px-5 sm:px-8 rounded-md shadow-lg disabled:cursor-not-allowed disabled:opacity-70 focus:ring-0",
       STYLES.MIXINS.resetButton,
       variants === "default" && "bg-gray-200 shadow-primary hover:shadow-primaryInner",
-      variants === "primary" && "bg-blue-500",
-      variants === "secondary" && "bg-red-500",
+      variants === "primary" &&
+        "bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800",
+      variants === "secondary" && "bg-red-500 hover:bg-red-700 focus:bg-red-700 active:bg-red-800",
       variants === "contained" && "rounded-none",
       variants === "outlined" && "border border-gray-200",
       size === "lg" && "h-[48px] sm:h-[56px]",
