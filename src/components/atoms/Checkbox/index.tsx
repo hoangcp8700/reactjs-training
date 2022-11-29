@@ -31,7 +31,7 @@ const CheckboxRef: React.ForwardRefRenderFunction<HTMLInputElement, CheckboxProp
       type='checkbox'
       className={clsx(
         STYLES.MIXINS.resetInput,
-        "bg-gray-400 rounded-sm hover:shadow-sm hover:bg-gray-200 disabled:bg-gray-300",
+        "bg-white !border-gray-400 rounded-sm hover:shadow-sm hover:bg-gray-200 disabled:bg-gray-300",
         checked && "animate-[tick_150ms_ease-in-out]",
         sizes === "sm" && "p-2",
         sizes === "md" && "p-3",
