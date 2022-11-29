@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import React, { forwardRef } from "react";
+import STYLES from "styles";
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
@@ -8,22 +9,24 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
 }
 
 const TextAreaRef: React.ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaProps> = (
-  { id, name, label, required, rows, placeholder, value, disabled, ...props },
+  { id, label, required, disabled, className, ...props },
   ref,
 ) => (
   <div className='relative'>
     {label && (
-      <div className='text-base text-black'>
+      <div className='text-base text-black mb-2'>
         <label htmlFor={id}>{label}</label>
         {required && <span className='ml-1 text-red-500 font-medium'>*</span>}
       </div>
     )}
-    <div className='relative mt-2'>
+    <div className='relative'>
       <textarea
         ref={ref}
         className={clsx(
-          "text-black resize-none transition-shadow w-full rounded-md pl-5 py-3 pr-3 shadow-primary focus:shadow-primaryInner focus:outline-none",
+          STYLES.MIXINS.resetInput,
+          "bg-white bg-clip-border border border-solid !border-gray-300 resize-none w-full rounded-sm p-3 focus:border-blue-600",
           disabled && "cursor-not-allowed opacity-50",
+          className,
         )}
         disabled={disabled}
         {...props}

@@ -9,6 +9,7 @@ import Input from "components/atoms/Input";
 import Link from "components/atoms/Link";
 import Radio from "components/atoms/Radio";
 import Select from "components/atoms/Select";
+import TextArea from "components/atoms/TextArea";
 
 const dataSelectDummy = new Array(10).fill(true).map((_, idx) => ({
   id: (idx + 1).toString(),
@@ -61,6 +62,7 @@ const Home: React.FC = () => {
           isLoading={loading}
           handleLoadMore={() => dataSelect.length < 31 && handleLoadMore()}
         />
+        <TextArea id='test' name='descriptiop' placeholder='12321' label='tesT' />
       </header>
     </div>
   );

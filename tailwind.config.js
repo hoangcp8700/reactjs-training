@@ -31,12 +31,6 @@ module.exports = {
           300: "rgba(0,0,0,0.3)",
         },
       },
-      boxShadow: {
-        primary:
-          "-5px 5px 10px rgba(216, 216, 219, 0.2), 5px -5px 10px rgba(216, 216, 219, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.9), 5px 5px 13px rgba(216, 216, 219, 0.9), inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(216, 216, 219, 0.5)",
-        primaryInner:
-          "1px 1px 2px rgba(255, 255, 255, 0.3), -1px -1px 2px rgba(216, 216, 219, 0.5), inset -5px 5px 5px rgba(216, 216, 219, 0.2), inset 5px -5px 5px rgba(216, 216, 219, 0.2), inset -5px -5px 5px rgba(255, 255, 255, 0.9), inset 3px 3px 5px rgba(216, 216, 219, 0.9)",
-      },
       keyframes: {
         tick: {
           "0%": { transform: "scale(0)" },

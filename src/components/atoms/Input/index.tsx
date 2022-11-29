@@ -13,7 +13,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { type = "text", label, id, error, disabled, isSearch = false, required, ...props },
+  { type = "text", label, id, error, disabled, isSearch = false, required, className, ...props },
   ref,
 ) => (
   <div className='relative'>
@@ -29,7 +29,7 @@ const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         type={type}
         className={clsx(
           STYLES.MIXINS.resetInput,
-          "m-0 block text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid !border-gray-300 placeholder:text-gray-400 transition-all w-full rounded-sm px-3 py-2 focus:text-gray-700 focus:bg-white focus:border-blue-600",
+          "m-0 block text-base font-normal text-gray-700 bg-white bg-clip-border border border-solid !border-gray-300 placeholder:text-gray-400 transition-all w-full rounded-sm px-3 py-2 focus:text-gray-700 focus:bg-white focus:border-blue-600",
           isSearch && "pr-12",
           error && "!text-red-500 !border-red-700",
           disabled && "cursor-not-allowed opacity-50",
