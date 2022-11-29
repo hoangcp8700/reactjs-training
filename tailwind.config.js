@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+const percentageWidth = require('tailwindcss-percentage-width');
 module.exports = {
-  content: ["./src/components/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       spacing: {
@@ -50,5 +51,6 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/line-clamp"),
     require("@tailwindcss/aspect-ratio"),
+    percentageWidth
   ],
 }

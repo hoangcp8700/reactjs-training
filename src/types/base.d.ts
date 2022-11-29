@@ -13,5 +13,7 @@ type LinkType = {
 
 type ImageType = {
   src: string;
+  srcTablet?: string;
+  srcMobile?: string;
   alt: string;
 };
