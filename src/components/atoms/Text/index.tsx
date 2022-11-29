@@ -10,7 +10,7 @@ interface TextProps {
 
 const Text: React.FC<TextProps> = ({ type = "p", content, children, className }) => {
   const Element = type;
-  const styleDefault = useMemo(() => "", []);
+  const styleDefault = useMemo(() => "text-base font-light leading-relaxed m-0", []);
 
   return content ? (
     <Element
