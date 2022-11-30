@@ -100,7 +100,7 @@ const NavSearch: React.FC<NavSearchProps> = () => {
                   )}
                 </div>
                 {loading && <Loading />}
-                <Loading className='py-6' />
+                <Loading />
               </div>
             </ResultSearchBox>
           </div>

@@ -26,7 +26,7 @@ const Loading: React.FC<LoadingProps> = ({ className, fullScreen, isOverlay }) =
     <div className='w-full h-full'>
       <div
         className={clsx(
-          "relative adjust-flex-center w-full h-full translate-x-[32px] py-8",
+          "relative adjust-flex-center w-full h-full translate-x-[32px] py-6",
           className,
         )}
       >

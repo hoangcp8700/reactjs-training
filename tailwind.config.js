@@ -55,8 +55,8 @@ module.exports = {
           "100%": { transform: "scale(1)" },
         },
         spinnerLoading: {
-          "0%": { transform: 'rotate(0deg) translateX(-200%)' },
-          "60%, 100%": { transform: 'rotate(360deg) translateX(-200%)' },
+          "0%": { transform: 'rotate(0deg) translateX(-120%)' },
+          "60%, 100%": { transform: 'rotate(360deg) translateX(-120%)' },
         }
       },
     },

@@ -15,7 +15,7 @@ import {
   SubMenuType,
   ViewAllType,
 } from "services/menus/types";
-import STYLES from "styles";
+// import STYLES from "styles";
 
 import NavSearch from "../NavSearch";
 
@@ -110,14 +110,12 @@ export const SubMenuTablet: React.FC<SubMenuTabletProps> = ({ menus, open, onClo
 
   return (
     <>
-      {open && <div className={STYLES.MIXINS.overlay("bg-gray-200")} />}
+      {/* {open && <div className={STYLES.MIXINS.overlay("bg-gray-200")} />} */}
       <Modal
-        // variant='draw'
-        // position='left'
         open={open}
         onClose={onClose}
         className={{
-          content: "max-w-[320px]",
+          content: "max-w-[320px] h-[100vh]",
           body: "py-6",
         }}
       >

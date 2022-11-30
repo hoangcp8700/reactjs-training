@@ -84,20 +84,20 @@ const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus }) => {
 
   return (
     <>
-      <HeaderBody>
+      <HeaderBody className='!bg-gray-200'>
         <Container>
           <div className='flex justify-between items-center relative o-header_wrapper-tablet'>
             <div className='o-header_sideLeft'>
               <IconButton
-                // iconName='hamburger'
-                iconName='close'
+                iconName='hamburger'
                 size={40}
                 buttonProps={{
                   onClick: () => setIsOpen(!isOpen),
+                  className: "shadow-none",
                 }}
               />
             </div>
-            <div className='min-h-[60px] pr-10 adjust-flex-center'>
+            <div className='min-h-[60px] pr-10 w-full adjust-flex-center'>
               <div className='absolute bottom-[-10px] h-[50px] w-[50px]'>
                 <Link href={logo.link}>
                   <Image src={logo.imgSrc} alt={logo.alt} />
@@ -105,9 +105,23 @@ const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus }) => {
               </div>
             </div>
             <div className='absolute right-0 adjust-flex-center'>
-              <IconButton iconName='user' size={40} className='mr-3 lg:mr-6' />
-              <IconButton iconName='heartFill' size={40} className='mr-3 lg:mr-6' />
-              <IconButton iconName='cartShopping' size={40} />
+              <IconButton
+                buttonProps={{ className: "shadow-none" }}
+                iconName='user'
+                size={16}
+                className='mr-3 lg:mr-6'
+              />
+              <IconButton
+                buttonProps={{ className: "shadow-none" }}
+                iconName='heartFill'
+                size={16}
+                className='mr-3 lg:mr-6'
+              />
+              <IconButton
+                buttonProps={{ className: "shadow-none" }}
+                iconName='cartShopping'
+                size={16}
+              />
             </div>
           </div>
         </Container>
