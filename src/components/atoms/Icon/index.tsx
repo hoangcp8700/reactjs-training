@@ -6,7 +6,7 @@ import ICON_LISTS from "./constants";
 interface IconStyleProps {
   size?: number;
 }
-interface IconProps extends IconStyleProps {
+export interface IconProps extends IconStyleProps {
   iconName: IconName;
   className?: string;
 }

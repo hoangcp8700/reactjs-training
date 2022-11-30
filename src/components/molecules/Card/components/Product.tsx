@@ -43,7 +43,7 @@ const CardProduct: React.FC<CardProductProps> = ({
     <div className='relative w-full bg-white rounded-lg sm:rounded-2xl overflow-hidden shadow-md'>
       <div className='h-full'>
         <div className='rounded-lg sm:rounded-2xl overflow-hidden group'>
-          <Link target={title?.target} href={title?.url}>
+          <Link target={title?.target} href={title?.href}>
             <Image {...thumbnail} ratio={[4, 3]} className='group-hover:scale-150' />
           </Link>
 
@@ -66,7 +66,7 @@ const CardProduct: React.FC<CardProductProps> = ({
           )}
         </div>
         <div className='mt-2 pb-4 px-2'>
-          <Link target={title?.target} href={title?.url}>
+          <Link target={title?.target} href={title?.href}>
             <div className='flex items-center justify-start'>
               <Text className='font-bold text-red-700'>{renderMoney(price, ".", "đ")}</Text>
               {originPrice && (
@@ -85,7 +85,7 @@ const CardProduct: React.FC<CardProductProps> = ({
             </div>
           )}
 
-          <Link target={title?.target} href={title?.url}>
+          <Link target={title?.target} href={title?.href}>
             <TextFadeEllipsis className='group'>
               <Text className='text-sm text-slate-800 group-hover:text-blue-600'>{title.text}</Text>
             </TextFadeEllipsis>

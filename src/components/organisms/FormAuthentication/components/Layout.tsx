@@ -58,8 +58,8 @@ const FormAuthenticationLayout: React.FC<FormAuthenticationProps> = ({
                 </Text>
               </div>
 
-              <Link href={description.link.url} target={description.link.target}>
-                <Text className='font-sm text-red-500 font-semibold' type='span'>
+              <Link href={description.link.href} target={description.link.target}>
+                <Text className='text-sm text-red-500 font-semibold' type='span'>
                   {description.link.text}
                 </Text>
               </Link>

@@ -13,7 +13,7 @@ const ResetPasswordContainer: React.FC<ResetPasswordContainerProps> = () => (
       text: `Already have account?`,
       link: {
         text: "Log in",
-        url: baseSlug(CONSTANT_ROUTE.VI.LOGIN, true),
+        href: baseSlug(CONSTANT_ROUTE.VI.LOGIN),
         target: "_self",
       },
     }}

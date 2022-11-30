@@ -1,23 +1,5 @@
-.wrapSpinner {
-  width: 100%;
-  height: 100%;
-}
-.spinner {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  transform: translateX(32px);
-  padding: 32px 0;
-}
-
 .spinner div {
-  width: 16px;
-  height: 16px;
   background-color: #474bff;
-  border-radius: 50%;
   animation: spinner-4t3wzl 1.25s infinite backwards;
 }
 
@@ -50,7 +32,6 @@
   0% {
     transform: rotate(0deg) translateX(-200%);
   }
-
   60%,
   100% {
     transform: rotate(360deg) translateX(-200%);

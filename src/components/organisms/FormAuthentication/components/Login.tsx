@@ -73,7 +73,7 @@ const Login: React.FC<IProps> = ({ handleSubmit, btnSubmit }) => {
       <ButtonSubmitControl btnSubmitText={btnSubmit}>
         <div className='mb-1.5 text-right'>
           <Link href={baseSlug(CONSTANT_ROUTE.VI.FORGOT_PASSWORD, true)}>
-            <Text className='text-sm font-sm text-red-500'>Quên mật khẩu?</Text>
+            <Text className='text-sm text-red-500'>Quên mật khẩu?</Text>
           </Link>
         </div>
       </ButtonSubmitControl>

@@ -14,7 +14,7 @@ const VerifyContainer: React.FC<VerifyContainerProps> = () => (
       text: `Don't have account?`,
       link: {
         text: "Sign up",
-        url: baseSlug(CONSTANT_ROUTE.VI.REGISTER, true),
+        href: baseSlug(CONSTANT_ROUTE.VI.REGISTER),
         target: "_self",
       },
     }}

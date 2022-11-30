@@ -2,11 +2,11 @@ type OptionType = {
   value: string;
   label: string;
   id?: number | string;
-  url?: string;
+  href?: string;
 };
 
 type LinkType = {
-  url: string;
+  href: string;
   text?: string;
   target?: string;
 };

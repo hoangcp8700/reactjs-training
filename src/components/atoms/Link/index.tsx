@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { useMemo } from "react";
 import { NavLink as RouterLink, LinkProps as RouterLinkProps } from "react-router-dom";
 
@@ -5,11 +6,35 @@ export interface LinkProps extends Omit<RouterLinkProps, "to"> {
   href?: string;
   search?: string;
   useExternal?: boolean;
+  isDecoration?: boolean;
+  className?: string;
 }
 
-const Link: React.FC<LinkProps> = ({ children, href, search, useExternal, ...props }) => {
-  const style = useMemo(() => "underline decoration-transparent", []);
-  if (!href) return <span {...props}>{children}</span>;
+const Link: React.FC<LinkProps> = ({
+  children,
+  href,
+  search,
+  useExternal,
+  isDecoration,
+  className,
+  ...props
+}) => {
+  const style = useMemo(
+    () =>
+      clsx(
+        "underline decoration-transparent",
+        isDecoration && "hover:decoration-inherit transition duration-300 ease-in-out",
+        className,
+      ),
+    [isDecoration, className],
+  );
+
+  if (!href)
+    return (
+      <span {...props} className={style}>
+        {children}
+      </span>
+    );
 
   if (href.includes("http") || useExternal) {
     return (

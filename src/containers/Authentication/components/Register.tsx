@@ -14,7 +14,7 @@ const RegisterContainer: React.FC<RegisterContainerProps> = () => (
       text: `Already have account?`,
       link: {
         text: "Sign in",
-        url: baseSlug(CONSTANT_ROUTE.VI.LOGIN, true),
+        href: baseSlug(CONSTANT_ROUTE.VI.LOGIN),
         target: "_self",
       },
     }}

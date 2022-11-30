@@ -4,6 +4,8 @@ import { ReactComponent as Loading } from "assets/icons/ic_loading.svg";
 import { ReactComponent as Search } from "assets/icons/ic_search.svg";
 import { ReactComponent as Heart } from "assets/icons/ic_heart.svg";
 import { ReactComponent as HeartFill } from "assets/icons/ic_heart_fill.svg";
+import { ReactComponent as User } from "assets/icons/ic_user.svg";
+import { ReactComponent as CartShopping } from "assets/icons/ic_cart_shopping.svg";
 
 const ICON_LISTS = {
   search: Search,
@@ -12,6 +14,8 @@ const ICON_LISTS = {
   arrowUp: ArrowUp,
   heart: Heart,
   heartFill: HeartFill,
+  user: User,
+  cartShopping: CartShopping,
 };
 
 export default ICON_LISTS;

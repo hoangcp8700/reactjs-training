@@ -11,6 +11,7 @@ import Radio from "components/atoms/Radio";
 import Select from "components/atoms/Select";
 import TextArea from "components/atoms/TextArea";
 import Card from "components/molecules/Card";
+import Accordion, { AccordionWrapper } from "components/organisms/Accordion";
 
 const dataSelectDummy = new Array(10).fill(true).map((_, idx) => ({
   id: (idx + 1).toString(),
@@ -72,18 +73,78 @@ const Home: React.FC = () => {
             }}
             title={{
               text: "New Balance 67/212 Men's Sneakers - Mindful Grey New Balance 67/212 Men's Sneakers",
-              url: "/",
+              href: "/",
               target: "_self",
             }}
             sales={[
               { label: "Giảm 30%" },
-              { label: "Free ship", style: { background: "#fafa", color: "#000" } },
+              {
+                label: "Free ship",
+                style: {
+                  background: "#fafa",
+                  color: "#000",
+                },
+              },
             ]}
             price={500000}
             originPrice={1000000}
             handleFavorite={() => console.log("favorite")}
           />
         </div>
+        <AccordionWrapper>
+          <Accordion
+            headingNode='subtitle 1'
+            classProps={{
+              wrapper: "wrapper-1",
+              body: "body-1",
+              item: "item-1",
+            }}
+          >
+            <Accordion
+              headingNode={
+                <Link href='/1a' isDecoration>
+                  1a
+                </Link>
+              }
+            />
+            <Accordion
+              headingNode={
+                <Link href='/1b' isDecoration>
+                  1b
+                </Link>
+              }
+            />
+            <Accordion
+              headingNode={
+                <Link href='/1c' isDecoration>
+                  1c
+                </Link>
+              }
+            />
+            <Accordion
+              headingNode={
+                <Link href='/1d' isDecoration>
+                  1d
+                </Link>
+              }
+            />
+          </Accordion>
+          <Accordion
+            headingNode={
+              <Link href='/subtitle-2' isDecoration>
+                subtitle 2
+              </Link>
+            }
+          />
+          <Accordion
+            headingNode={
+              <Link href='/subtitle-3' isDecoration>
+                subtitle 3
+              </Link>
+            }
+          />
+          <Accordion headingNode={<Text>subtitle 4</Text>} />
+        </AccordionWrapper>
       </header>
     </div>
   );

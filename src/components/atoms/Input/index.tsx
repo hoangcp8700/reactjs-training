@@ -33,6 +33,7 @@ const InputRef: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           isSearch && "pr-12",
           error && "!text-red-500 !border-red-500",
           disabled && "cursor-not-allowed opacity-50",
+          className,
         )}
         disabled={disabled}
         {...props}

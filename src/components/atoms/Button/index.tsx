@@ -5,7 +5,7 @@ import STYLES from "styles";
 
 import Icon from "../Icon";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   loading?: boolean;
   size?: "default" | "md" | "lg";
