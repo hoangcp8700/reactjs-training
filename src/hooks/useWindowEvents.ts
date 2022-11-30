@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 function useWindowEvents<K extends keyof WindowEventMap>(
-  eventName: string,
-  callback: (listener: WindowEventMap[K]) => void,
+  eventName: K,
+  callback: (listener: WindowEventMap[K]) => unknown,
   deps: Array<unknown>,
 ) {
   useEffect(() => {

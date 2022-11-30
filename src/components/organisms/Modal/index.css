@@ -1,17 +1,17 @@
- .modal-enter {
-   opacity: 0.01;
- }
-
- .modal-enter.modal-enter-active {
-   opacity: 1;
-   transition: opacity 500ms ease-in;
- }
-
- .modal-exit {
-   opacity: 1;
- }
-
- .modal-exit.modal-exit-active {
-   opacity: 0.01;
-   transition: opacity 300ms ease-in;
- }
+.modal {
+  overflow: hidden;
+}
+.modal-enter {
+  transform: translateX(-1000px);
+}
+.modal-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-in;
+}
+.modal-exit {
+  transform: translateX(0px);
+}
+.modal-exit-active {
+  transform: translateX(-1000px);
+  transition:  transform 300ms ease-in;
+}

@@ -10,6 +10,7 @@ import { CONSTANT_ROUTE } from "routes/constants";
 import { baseSlug } from "utils/functions";
 import IconButton from "components/atoms/IconButton";
 import clsx from "clsx";
+import { IconName } from "components/atoms/Icon";
 
 import NavSearch from "./NavSearch";
 import { SubMenuDesktop, SubMenuTablet } from "./SubMenu";
@@ -25,13 +26,28 @@ interface HeaderProps {
 }
 interface HeaderContainerProps extends HeaderProps {}
 
+const listIconHeaderDummy = [
+  {
+    iconName: "user",
+    linkProps: {
+      href: baseSlug(CONSTANT_ROUTE.VI.LOGIN),
+    },
+  },
+  {
+    iconName: "heartFill",
+  },
+  {
+    iconName: "cartShopping",
+  },
+];
+
 const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus }) => {
   const [idxHover, setIdxHover] = useState(-1);
 
   return (
     <HeaderBody onMouseLeave={() => setIdxHover(-1)}>
       <Container>
-        <div className='flex justify-between items-center relative'>
+        <div className='flex justify-between items-center relative '>
           <div className='min-h-[32px] relative min-w-[90px]'>
             <div className='absolute bottom-0 left-0 h-[60px] w-[60px]'>
               <Link href={logo.link}>
@@ -59,14 +75,16 @@ const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus }) => {
             </ul>
           </div>
           <div className='adjust-flex-center'>
-            <IconButton
-              size={16}
-              iconName='user'
-              linkProps={{ href: baseSlug(CONSTANT_ROUTE.VI.LOGIN) }}
-              className='mr-1 lg:mr-6'
-            />
-            <IconButton size={16} iconName='heartFill' className='mr-3 lg:mr-6' />
-            <IconButton size={16} iconName='cartShopping' />
+            {listIconHeaderDummy.map((ele, idx) => (
+              <IconButton
+                key={`icon-header-desktop-${idx.toString()}`}
+                size={16}
+                iconName={ele.iconName as IconName}
+                linkProps={{ href: baseSlug(CONSTANT_ROUTE.VI.LOGIN) }}
+                buttonProps={{ className: "shadow-none" }}
+                className={idx < listIconHeaderDummy.length - 1 ? "mr-1 lg:mr-6" : ""}
+              />
+            ))}
           </div>
         </div>
       </Container>
@@ -105,23 +123,16 @@ const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus }) => {
               </div>
             </div>
             <div className='absolute right-0 adjust-flex-center'>
-              <IconButton
-                buttonProps={{ className: "shadow-none" }}
-                iconName='user'
-                size={16}
-                className='mr-3 lg:mr-6'
-              />
-              <IconButton
-                buttonProps={{ className: "shadow-none" }}
-                iconName='heartFill'
-                size={16}
-                className='mr-3 lg:mr-6'
-              />
-              <IconButton
-                buttonProps={{ className: "shadow-none" }}
-                iconName='cartShopping'
-                size={16}
-              />
+              {listIconHeaderDummy.map((ele, idx) => (
+                <IconButton
+                  key={`icon-header-desktop-${idx.toString()}`}
+                  size={16}
+                  iconName={ele.iconName as IconName}
+                  linkProps={{ href: baseSlug(CONSTANT_ROUTE.VI.LOGIN) }}
+                  buttonProps={{ className: "shadow-none" }}
+                  className={idx < listIconHeaderDummy.length - 1 ? "mr-1 lg:mr-6" : ""}
+                />
+              ))}
             </div>
           </div>
         </Container>
@@ -155,7 +166,7 @@ const Header: React.FC<HeaderContainerProps> = ({ logo, menus }) => {
     <header className={clsx("fixed top-0 w-full z-header ")}>
       <nav
         className={clsx(
-          "transition-transform duration-300 ease-in-out",
+          "transition-transform duration-300 ease-in-out bg-gray-200",
           isScroll && "translate-y-[-1000px]",
         )}
       >

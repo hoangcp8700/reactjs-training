@@ -43,7 +43,7 @@ const NavSearch: React.FC<NavSearchProps> = () => {
   useDebounce(handleSearch, 350, [search]);
 
   return (
-    <NavSearchWrapper className='relative bg-gray-200'>
+    <NavSearchWrapper className='relative'>
       {active && (
         <div
           className={STYLES.MIXINS.overlay("bg-transparent")}

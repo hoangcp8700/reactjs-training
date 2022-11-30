@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Icon from "components/atoms/Icon";
 import useDropdown from "hooks/useDropdown";
 import React from "react";
 
@@ -25,18 +26,27 @@ const Accordion: React.FC<AccordionProps> = ({ headingNode, classProps, children
       <div
         aria-hidden
         role='button'
-        className='relative cursor-context-menu'
+        className={clsx("relative", children ? "cursor-grab" : "cursor-context-menu")}
         onClick={() => (children ? handleToggle() : undefined)}
       >
         {/* title */}
         <div
           className={clsx(
-            "w-fit",
+            "w-auto",
             children && active && "font-semibold",
-            children && "cursor-grab",
+            children && "flex items-center justify-between cursor-grab hover:font-semibold",
           )}
         >
           {headingNode}
+          {children && (
+            <span className={clsx(active ? "rotate-0" : "rotate-180", "transition-transform")}>
+              <Icon
+                iconName='arrowUp'
+                size={12}
+                className={active ? "fill-blue-500" : "fill-gray-700"}
+              />
+            </span>
+          )}
         </div>
         {/* // iconToggle  */}
         {children && (

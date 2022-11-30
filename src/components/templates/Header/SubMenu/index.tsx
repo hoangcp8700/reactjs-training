@@ -109,60 +109,66 @@ export const SubMenuTablet: React.FC<SubMenuTabletProps> = ({ menus, open, onClo
   }, [menus]);
 
   return (
-    <>
-      {/* {open && <div className={STYLES.MIXINS.overlay("bg-gray-200")} />} */}
-      <Modal
-        open={open}
-        onClose={onClose}
-        className={{
-          content: "max-w-[320px] h-[100vh]",
-          body: "py-6",
-        }}
-      >
-        <>
-          <NavSearch />
-          <AccordionWrapper>
-            {renderSubMenu.map((ele, idx) => (
-              <Accordion
-                key={`subMenu-parent-${idx.toString()}`}
-                headingNode={
-                  <Link href={ele.link} className='text-sm'>
-                    {ele.title}
-                  </Link>
-                }
-                classProps={{
-                  wrapper: "not-last:mb-2",
-                }}
-              >
-                {ele.subMenu &&
-                  ele.subMenu.length > 0 &&
-                  ele.subMenu.map((ele2, idx2) => (
-                    <Accordion
-                      key={`subMenu-child-1-${idx2.toString()}`}
-                      headingNode={<Link href={ele2?.viewAll?.link}>{ele2.title}</Link>}
-                      classProps={{
-                        wrapper: "not-last:mb-1",
-                      }}
-                    >
-                      {ele2.subMenu &&
-                        ele2.subMenu.length > 0 &&
-                        ele2.subMenu.map((ele3, idx3) => (
-                          <Accordion
-                            key={`subMenu-child-2-${idx3.toString()}`}
-                            headingNode={<Link href={ele3?.link}>{ele3.title}</Link>}
-                            classProps={{
-                              wrapper: "not-last:mb-1",
-                            }}
-                          />
-                        ))}
-                    </Accordion>
-                  ))}
-              </Accordion>
-            ))}
-          </AccordionWrapper>
-        </>
-      </Modal>
-    </>
+    <Modal
+      open={open}
+      onClose={onClose}
+      className={{
+        content: "max-w-[320px] h-[100vh]",
+        body: "py-6",
+      }}
+      headerProps={{
+        node: <NavSearch />,
+        className: "py-2",
+      }}
+    >
+      <AccordionWrapper>
+        {renderSubMenu.map((ele, idx) => (
+          <Accordion
+            key={`subMenu-parent-${idx.toString()}`}
+            headingNode={
+              <Link href={ele.link} className='text-sm'>
+                {ele.title}
+              </Link>
+            }
+            classProps={{
+              wrapper: "not-last:mb-2",
+            }}
+          >
+            {ele.subMenu &&
+              ele.subMenu.length > 0 &&
+              ele.subMenu.map((ele2, idx2) => (
+                <Accordion
+                  key={`subMenu-child-1-${idx2.toString()}`}
+                  headingNode={
+                    <Link href={ele2?.viewAll?.link} className='text-sm'>
+                      {ele2.title}
+                    </Link>
+                  }
+                  classProps={{
+                    wrapper: "not-last:mb-1",
+                  }}
+                >
+                  {ele2.subMenu &&
+                    ele2.subMenu.length > 0 &&
+                    ele2.subMenu.map((ele3, idx3) => (
+                      <Accordion
+                        key={`subMenu-child-2-${idx3.toString()}`}
+                        headingNode={
+                          <Link href={ele3?.link} className='text-sm'>
+                            {ele3.title}
+                          </Link>
+                        }
+                        classProps={{
+                          wrapper: "not-last:mb-1",
+                        }}
+                      />
+                    ))}
+                </Accordion>
+              ))}
+          </Accordion>
+        ))}
+      </AccordionWrapper>
+    </Modal>
   );
 };
 
