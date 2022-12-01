@@ -48,8 +48,8 @@ const ModalRef: React.ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (
   return createPortal(
     <div className='modal modal-portal'>
       <div
-        ref={ref}
         className={clsx(
+          STYLES.MIXINS.overlay("bg-gray-800/50"),
           "fixed top-0 left-0 w-full h-full outline-none z-modal",
           className?.wrapper,
         )}
@@ -57,16 +57,17 @@ const ModalRef: React.ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (
         aria-modal
         tabIndex={-1}
         role='dialog'
+        onClick={onClose}
       >
         <div
           aria-hidden
-          className={clsx(STYLES.MIXINS.overlay("bg-gray-800/50"), "transition-none")}
-          onClick={onClose}
-        />
-        <div className='modal-dialog modal-overlay relative w-auto pointer-events-none'>
+          ref={ref}
+          onClick={(e) => e.stopPropagation()}
+          className='modal-dialog modal-overlay relative w-auto pointer-events-none'
+        >
           <div
             className={clsx(
-              "modal-content  border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current",
+              "modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current",
               className?.content,
             )}
           >
