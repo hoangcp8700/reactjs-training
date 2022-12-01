@@ -7,6 +7,7 @@ import {
   SkeletonCardProduct,
 } from "components/molecules/Card/components/Product";
 import Tabs, { Tab, TabPanel } from "components/organisms/Tabs";
+import useDeviceQueries from "hooks/useDeviceQueries";
 import useScrollInfinite from "hooks/useScrollInfinite";
 import React from "react";
 import LazyLoad from "react-lazy-load";
@@ -31,7 +32,7 @@ const HomeSuggest: React.FC<HomeSuggestProps> = ({
   onMore,
 }) => {
   const { setNode } = useScrollInfinite(onMore);
-
+  const { isMobile } = useDeviceQueries();
   return (
     <div className='t-homeSuggest'>
       <Container>
@@ -61,7 +62,7 @@ const HomeSuggest: React.FC<HomeSuggestProps> = ({
               <div className='grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4'>
                 {products.map((item, idx) => (
                   <LazyLoad
-                    height={300}
+                    height={isMobile ? 400 : 300}
                     offset={100}
                     key={`homeSuggest-product-item-${idx.toString()}`}
                   >
