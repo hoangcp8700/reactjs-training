@@ -14,7 +14,7 @@ import {
   SubMenu2Type,
   SubMenuType,
   ViewAllType,
-} from "services/menus/types";
+} from "api/menus/types";
 // import STYLES from "styles";
 
 import NavSearch from "../NavSearch";

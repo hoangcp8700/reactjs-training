@@ -1,4 +1,4 @@
-import { MenuHeaderType } from "services/menus/types";
+import { MenuHeaderType } from "api/menus/types";
 import { IMAGE_DUMMY } from "utils/constants";
 
 export const menuHeaderData: MenuHeaderType[] = [

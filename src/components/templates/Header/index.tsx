@@ -5,7 +5,7 @@ import Container from "components/common/Container";
 import useDeviceQueries from "hooks/useDeviceQueries";
 import useWindowEvents from "hooks/useWindowEvents";
 import React, { useRef, useState } from "react";
-import { MenuHeaderType } from "services/menus/types";
+import { MenuHeaderType } from "api/menus/types";
 import { CONSTANT_ROUTE } from "routes/constants";
 import { baseSlug } from "utils/functions";
 import IconButton from "components/atoms/IconButton";

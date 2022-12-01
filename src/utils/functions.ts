@@ -24,11 +24,6 @@ export function removeAccents(str: string) {
     .replace(/Đ/g, "D");
 }
 
-export function parseFormatMaskInput(text: string, prefix: string): string {
-  if (!text) return "";
-  return text.replaceAll(new RegExp(prefix, "g"), "");
-}
-
 // slugify('Hello World!'); // 'hello-world'
 export const slugify = (str: string) => {
   if (!str) return "";
@@ -38,6 +33,34 @@ export const slugify = (str: string) => {
     .replace(/[^\w\s-]/g, "")
     .replace(/[\s_-]+/g, "-")
     .replace(/^-+|-+$/g, "");
+};
+
+// scroll element always center
+export const handleScrollXCenter = (
+  ref: React.RefObject<HTMLDivElement | null>,
+  classNameEleActive: string,
+) => {
+  const eleScroll = ref.current;
+  const eleActive = document.querySelector(classNameEleActive);
+
+  if (!eleActive || !eleScroll) return;
+  // get width element scroll
+  const widthEleScroll = eleScroll.getBoundingClientRect().width;
+  // get distance element scroll compared to y window
+  const xEleScroll = eleScroll.getBoundingClientRect().x;
+  // get width element active
+  const widthEleActive = eleActive.getBoundingClientRect().width;
+  // get distance element active compared to y window
+  const xEleActive = eleActive.getBoundingClientRect().x;
+  // get position sroll bar
+  const positionScroll = eleScroll.scrollLeft;
+  const scrollX =
+    xEleActive - xEleScroll + widthEleActive / 2 + positionScroll - widthEleScroll / 2;
+
+  eleScroll.scroll({
+    left: scrollX,
+    behavior: "smooth",
+  });
 };
 
 export default undefined;

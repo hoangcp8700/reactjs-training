@@ -12,6 +12,8 @@ import Select from "components/atoms/Select";
 import TextArea from "components/atoms/TextArea";
 import Card from "components/molecules/Card";
 import Accordion, { AccordionWrapper } from "components/organisms/Accordion";
+import Tabs, { Tab, TabPanel } from "components/organisms/Tabs";
+import clsx from "clsx";
 
 const dataSelectDummy = new Array(10).fill(true).map((_, idx) => ({
   id: (idx + 1).toString(),
@@ -19,11 +21,18 @@ const dataSelectDummy = new Array(10).fill(true).map((_, idx) => ({
   label: `value ${idx + 11} ${Math.floor(Math.random() * 1000)}`,
 }));
 
+const dummyTabsData = new Array(10).fill(true).map((_, idx) => ({
+  id: idx,
+  value: "tin-tuc",
+  label: `Tin tức ${idx}`,
+}));
+
 const Home: React.FC = () => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false); // radio
   const [loading, setLoading] = useState(false);
-  const [select, setSelect] = useState<OptionType>();
-  const [dataSelect, setDataSelect] = useState<OptionType[]>(dataSelectDummy);
+  const [select, setSelect] = useState<OptionType>(); // select
+  const [dataSelect, setDataSelect] = useState<OptionType[]>(dataSelectDummy); // select
+  const [indexActive, setIndexActive] = useState(0); // tabs
 
   const handleLoadMore = () => {
     setLoading(true);
@@ -35,6 +44,32 @@ const Home: React.FC = () => {
   return (
     <div className='App'>
       <header className='App-header'>
+        <div style={{ minHeight: "200vh", background: "#fafafa" }}>
+          <Tabs indexActive={indexActive}>
+            {dummyTabsData.map((item, index) => (
+              <Tab
+                key={`tab-${index.toString()}`}
+                active={index === indexActive}
+                onClick={() => setIndexActive(index)}
+              >
+                <Text
+                  className={clsx(indexActive === index && "!text-blue-700", "hover:text-blue-700")}
+                >
+                  {item.label}
+                </Text>
+              </Tab>
+            ))}
+          </Tabs>
+
+          <TabPanel className='tabpanel-active'>
+            {/* // TODO: add animation here!!!! */}
+            {/* // TODO: update data */}
+            <div style={{ backgroundColor: "blue", padding: 50 }}>
+              {dummyTabsData[indexActive].label}
+            </div>
+          </TabPanel>
+        </div>
+
         <Text>text component</Text>
         <Heading>Heading component</Heading>
         <Image src={IMAGE_DUMMY} alt='test' ratio={[16, 9]} className='object-cover' />
