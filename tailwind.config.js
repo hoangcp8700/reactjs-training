@@ -20,7 +20,7 @@ module.exports = {
         xxs: "320px",
         xs: "576px",
         sm: "768px",
-        md: "1024px",
+        md: "991px",
         lg: "1200px",
         xl: "1440px",
       },
@@ -79,9 +79,10 @@ module.exports = {
     plugin(function ({ matchUtilities, addUtilities, addBase, theme, addVariant, e }) {
       // registering new base styles
       addBase({
-        'h1': { fontSize: theme('fontSize.2xl') },
-        'h2': { fontSize: theme('fontSize.xl') },
-        'h3': { fontSize: theme('fontSize.lg') },
+        'h1': { fontSize: theme('fontSize.3xl') },
+        'h2': { fontSize: theme('fontSize.2xl') },
+        'h3': { fontSize: theme('fontSize.xl') },
+        'h4': { fontSize: theme('fontSize.lg') },
       })
 
       // registering new static utility styles
@@ -98,6 +99,7 @@ module.exports = {
       addVariant('before-after', ['&:before', '&:after'])
       addVariant('not-last', '&:not(:last-child)')
       addVariant('not-first', '&:not(:first-child)')
+      addVariant('not-disabled', '&:not(:disabled)')
     })
   ],
 }

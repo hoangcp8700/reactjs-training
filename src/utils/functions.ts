@@ -63,4 +63,14 @@ export const handleScrollXCenter = (
   });
 };
 
+// GET ID INTO SLUG
+export const getIdBySlug = (str: string, key: string) => {
+  if (!str) return "";
+  const list = str.split(`.${key}-`);
+  if (list.length > 1) {
+    return list[list.length - 1];
+  }
+  return "";
+};
+
 export default undefined;

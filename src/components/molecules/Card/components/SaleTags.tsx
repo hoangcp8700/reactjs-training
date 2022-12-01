@@ -16,7 +16,7 @@ const SaleTags: React.FC<SaleTagsProps> = ({ sales }) => (
           className='bg-gray-600 rounded py-0.5 px-2.5 whitespace-nowrap'
           style={ele.style ? { ...ele.style } : {}}
         >
-          <Text type='span' className='text-white text-xs'>
+          <Text type='span' className='!text-white text-xs'>
             {ele.label}
           </Text>
         </div>

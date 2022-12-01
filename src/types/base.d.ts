@@ -17,3 +17,9 @@ type ImageType = {
   srcMobile?: string;
   alt: string;
 };
+
+type ColorType = {
+  id?: string;
+  label: string;
+  code: string;
+};

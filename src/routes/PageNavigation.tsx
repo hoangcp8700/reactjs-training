@@ -11,6 +11,7 @@ const isAuth = false;
 const langCurrent = "VI";
 
 const PageNavigation: React.FC = () => {
+  console.log("runnnn");
   const { slug } = useParams<{ slug: string }>();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);

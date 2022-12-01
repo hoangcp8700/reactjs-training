@@ -11,6 +11,7 @@ import { CONSTANT_ROUTE } from "routes/constants";
 import RedirectError from "routes/RedirectError";
 
 const NewsDetailPage = React.lazy(() => import("pages/NewsDetail"));
+const ProductDetailPage = React.lazy(() => import("pages/ProductDetail"));
 const HomePage = React.lazy(() => import("pages/Home"));
 const PageNavigation = React.lazy(() => import("routes/PageNavigation"));
 
@@ -31,6 +32,11 @@ const App = () => (
             <Route key={`route-${index.toString()}`} path={prefix === "vi" ? "" : prefix}>
               <Route index element={<HomePage />} />
               <Route path=':slug' element={<PageNavigation />} />
+              {/* // page detail */}
+              <Route
+                path={`${CONSTANT_ROUTE[ele].PRODUCT_DETAIL}/:slug`}
+                element={<ProductDetailPage />}
+              />
               <Route
                 path={`${CONSTANT_ROUTE[ele].NEWS_DETAIL}/:slug`}
                 element={<NewsDetailPage />}
@@ -38,6 +44,7 @@ const App = () => (
             </Route>
           );
         })}
+
         <Route path='*' element={<RedirectError />} />
       </Route>
     </Routes>

@@ -43,7 +43,7 @@ export const Tab: React.FC<TabProps> = ({
   >
     <div
       className={clsx(
-        "tab-label px-3 sm:px-4 relative transition-all duration-300 whitespace-nowrap before:content-[''] before:bg-black before:rounded-sm before:absolute before:bottom-[-8px] sm:before:bottom-[-12px] before:h-[2px] before:right-0 before:w-0 before:duration-300 before:ease-in-out",
+        "tab-label px-3 sm:px-4 relative transition-all duration-300 whitespace-nowrap before:content-[''] before:bg-blue-500 before:rounded-sm before:absolute before:bottom-0 before:h-[2px] before:right-0 before:w-0 before:duration-300 before:ease-in-out",
         active && "before:w-full before:left-0",
       )}
     >

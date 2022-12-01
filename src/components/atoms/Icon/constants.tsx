@@ -7,6 +7,7 @@ import { ReactComponent as HeartFill } from "assets/icons/ic_heart_fill.svg";
 import { ReactComponent as User } from "assets/icons/ic_user.svg";
 import { ReactComponent as CartShopping } from "assets/icons/ic_cart_shopping.svg";
 import { ReactComponent as Hamburger } from "assets/icons/ic_hamburger.svg";
+import { ReactComponent as CartAdd } from "assets/icons/ic_cart_add.svg";
 
 const ICON_LISTS = {
   search: Search,
@@ -18,6 +19,7 @@ const ICON_LISTS = {
   user: User,
   cartShopping: CartShopping,
   hamburger: Hamburger,
+  cartAdd: CartAdd,
 };
 
 export default ICON_LISTS;

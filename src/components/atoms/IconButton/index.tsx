@@ -8,13 +8,18 @@ import Link, { LinkProps } from "../Link";
 interface IconButtonProps extends IconProps {
   buttonProps?: ButtonProps;
   linkProps?: LinkProps;
-  className?: string;
+  wrapClassName?: string;
 }
 
-const IconButton: React.FC<IconButtonProps> = ({ className, linkProps, buttonProps, ...props }) => {
+const IconButton: React.FC<IconButtonProps> = ({
+  wrapClassName,
+  linkProps,
+  buttonProps,
+  ...props
+}) => {
   if (linkProps) {
     return (
-      <div className={className}>
+      <div className={wrapClassName}>
         <Button {...buttonProps} className={clsx("!px-3 rounded-full", buttonProps?.className)}>
           <Link {...linkProps}>
             <Icon {...props} />
@@ -24,7 +29,7 @@ const IconButton: React.FC<IconButtonProps> = ({ className, linkProps, buttonPro
     );
   }
   return (
-    <div className={className}>
+    <div className={wrapClassName}>
       <Button {...buttonProps} className={clsx("!px-3 rounded-full", buttonProps?.className)}>
         <Icon {...props} />
       </Button>

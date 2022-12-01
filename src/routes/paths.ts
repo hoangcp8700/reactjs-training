@@ -5,7 +5,6 @@ import { CONSTANT_ROUTE } from "./constants";
 
 const AboutUs = lazy(() => import("pages/AboutUs"));
 const Cart = lazy(() => import("pages/Cart"));
-const NewsDetail = lazy(() => import("pages/NewsDetail"));
 
 // ------- authentication page --------------
 const Login = lazy(() => import("pages/Authentication/Login"));
@@ -31,11 +30,6 @@ const TEMPLATE_PAGE: RoutePathItemProps[] = [
     component: Cart,
     private: true,
     authenticate: true,
-  },
-  {
-    paths: [CONSTANT_ROUTE.EN.NEWS_DETAIL, CONSTANT_ROUTE.VI.NEWS_DETAIL],
-    component: NewsDetail,
-    private: false,
   },
   // authentication
   {

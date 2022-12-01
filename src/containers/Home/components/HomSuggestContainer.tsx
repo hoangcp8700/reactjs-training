@@ -84,7 +84,7 @@ const HomeSuggestContainer: React.FC = () => {
             title: {
               text: ele.title,
               target: "_self",
-              href: `/${slugify(ele.title)}.i-${ele.id}`,
+              href: `/${CONSTANT_ROUTE[language].PRODUCT_DETAIL}/${slugify(ele.title)}.i-${ele.id}`,
             },
             sales: [
               { label: "Giảm 30%" },
