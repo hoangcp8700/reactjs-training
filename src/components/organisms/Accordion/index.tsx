@@ -52,7 +52,7 @@ const Accordion: React.FC<AccordionProps> = ({ headingNode, classProps, children
         {children && (
           <div
             className={clsx(
-              "absolute right-0 top-1/2 before-after:content-[] before-after:absolute before-after:right-0 before-after:top-1/2 before-after:transition-transform before-after:duration-300 before-after:w-3 md:before-after:w-4 before-after:h-1/2 before-after:bg-gray-400 after:rotate-90",
+              "absolute right-0 top-1/2 before-after:content-[''] before-after:absolute before-after:right-0 before-after:top-1/2 before-after:transition-transform before-after:duration-300 before-after:w-3 md:before-after:w-4 before-after:h-1/2 before-after:bg-gray-400 after:rotate-90",
               active && "after:rotate-180 before:rotate-0",
             )}
           />

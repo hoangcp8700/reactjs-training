@@ -47,7 +47,9 @@ const FormAuthenticationLayout: React.FC<FormAuthenticationProps> = ({
               <Text className='text-sm text-white/70 font-medium uppercase'>{subTitle}</Text>
             </div>
           )}
-          <div className='relative w-fit before:content-[] before:absolute before:bg-blue-600 before:rounded-full before:bottom-1 before:right-[-15px] before:height-[10px]'>
+          <div
+            className={`relative w-fit before:content-[''] before:absolute before:bg-blue-600 before:rounded-full before:bottom-1 before:right-[-15px] before:height-[10px]`}
+          >
             <Heading className='text-5xl text-white uppercase'>{title}</Heading>
           </div>
           {description && (

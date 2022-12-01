@@ -24,6 +24,7 @@ module.exports = {
         lg: "1200px",
         xl: "1440px",
       },
+
       colors: {
         gray: {
           primary: "#A0A5B9",
@@ -32,6 +33,9 @@ module.exports = {
           100: "rgba(0,0,0,0.1)",
           300: "rgba(0,0,0,0.3)",
         },
+      },
+      backgroundImage: {
+        'skeleton': "linear-gradient(90deg,rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%,  rgba(190, 190, 190, 0.2) 63%)",
       },
       zIndex: {
         '1': '1',
@@ -47,6 +51,7 @@ module.exports = {
       },
       animation: {
         'spinner-loading': 'spinnerLoading 1.25s infinite backwards',
+        'skeleton': 'skeleton 1.4s ease infinite',
       },
       keyframes: {
         tick: {
@@ -57,6 +62,10 @@ module.exports = {
         spinnerLoading: {
           "0%": { transform: 'rotate(0deg) translateX(-120%)' },
           "60%, 100%": { transform: 'rotate(360deg) translateX(-120%)' },
+        },
+        skeleton: {
+          '0%': { transform: 'translate(-37.5%)' },
+          '100%': { transform: 'translate(37.5%)' },
         }
       },
     },

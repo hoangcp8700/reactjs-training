@@ -8,7 +8,8 @@ export type ImageWrapperStyleProps = {
   ratio?: [number, number]; // [width, height] => [4,3]
 };
 
-export type ImageProps = ImageWrapperStyleProps &
+export type ImageProps = React.ImgHTMLAttributes<HTMLImageElement> &
+  ImageWrapperStyleProps &
   ImageType & {
     loading?: "lazy" | "eager" | undefined;
     classNameWrapper?: string;
@@ -31,6 +32,7 @@ const Image: React.FC<ImageProps> = ({
   loading = "lazy",
   classNameWrapper,
   className,
+  ...props
 }) => {
   const { isMobile, isTablet } = useDeviceQueries();
   const sourceImage = useMemo(() => {
@@ -56,6 +58,7 @@ const Image: React.FC<ImageProps> = ({
           "absolute h-full w-full left-0 top-0 object-cover transition ease-in-out duration-300",
           className,
         )}
+        {...props}
       />
     </ImageWrapper>
   );

@@ -2,6 +2,7 @@ export const CONSTANT_ROUTE = {
   EN: {
     HOME: "",
     CART: "carts",
+    CATEGORY: "categories",
     NEWS_DETAIL: "news-detail",
     ABOUT_US: "about-us",
     LOGIN: "login",
@@ -13,6 +14,7 @@ export const CONSTANT_ROUTE = {
   VI: {
     HOME: "",
     CART: "gio-hang",
+    CATEGORY: "danh-muc",
     NEWS_DETAIL: "chi-tiet-tin-tuc",
     ABOUT_US: "ve-chung-toi",
     LOGIN: "dang-nhap",

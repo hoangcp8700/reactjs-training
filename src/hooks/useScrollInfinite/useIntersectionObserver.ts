@@ -7,7 +7,7 @@ interface Args extends IntersectionObserverInit {
 
 function useIntersectionObserver(
   elementRef: Element | null,
-  { threshold = 1, root = null, rootMargin = "0%", freezeOnceVisible = false }: Args,
+  { threshold = 1, root = null, rootMargin = "1000px", freezeOnceVisible = false }: Args,
 ): IntersectionObserverEntry | undefined {
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
 

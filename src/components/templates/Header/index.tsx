@@ -60,7 +60,7 @@ const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus }) => {
               {menus.map((ele, idx) => (
                 <li
                   className={clsx(
-                    "not-last:mr-6 relative py-2 before:content-[] before:absolute before:bottom-0 before:right-0 before:w-0 before:h-[2px]before:transition before:duration-300 before:ease-in-out before:bg-gray-700",
+                    "not-last:mr-6 relative py-2 before:content-[''] before:absolute before:bottom-0 before:right-0 before:w-0 before:h-[2px]before:transition before:duration-300 before:ease-in-out before:bg-gray-700",
                     idxHover === idx &&
                       "before:left-0 before:w-full hover:before:left-0 hover:before:w-full",
                   )}

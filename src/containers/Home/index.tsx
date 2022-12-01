@@ -1,4 +1,6 @@
 import React from "react";
+
+import HomeSuggestContainer from "./components/HomSuggestContainer";
 // import { bannerSaleData } from "assets/dataDummy/banner";
 // import HeroBanner from "components/templates/HeroBanner";
 // import BrandDivision from "components/templates/BrandDivision";
@@ -118,7 +120,7 @@ const HomeContainer: React.FC<HomeContainerProps> = () => (
         originPrice: 550000,
       })}
     /> */}
-    {/* <HomeSuggestContainer /> */}asdas
+    <HomeSuggestContainer />
   </>
 );
 
