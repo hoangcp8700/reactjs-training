@@ -88,19 +88,19 @@ const NavSearch: React.FC<NavSearchProps> = () => {
                 ref={bodyRef}
               >
                 <div>
-                  {search ? (
+                  {search && (
                     <Text>
                       <Text type='span' className='text-sm'>
                         Từ khóa{" "}
                       </Text>
                       <Text type='span' className='text-sm font-medium' content={`"${search}"`} />
                     </Text>
-                  ) : (
+                  )}
+                  {!loading && !search && active && (
                     <Text className='text-sm text-gray-400' content='Nhập từ khóa tìm kiếm' />
                   )}
                 </div>
                 {loading && <Loading />}
-                <Loading />
               </div>
             </ResultSearchBox>
           </div>

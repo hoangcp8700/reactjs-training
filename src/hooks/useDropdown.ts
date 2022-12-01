@@ -31,6 +31,7 @@ const useDropdown = (heightDefault = "0px", opacityDefault = "0") => {
           elPanelWrapper.style.maxHeight = `${elPanelWrapper.offsetHeight}px`;
           setLoading(true);
         }
+
         setTimeout(() => {
           elPanelWrapper.style.maxHeight = heightDefault;
           elPanelWrapper.style.opacity = opacityDefault;
@@ -38,6 +39,8 @@ const useDropdown = (heightDefault = "0px", opacityDefault = "0") => {
         }, 10);
       }
     }
+
+    return undefined;
   }, [active, heightDefault, opacityDefault]);
 
   return { active, wrapRef, bodyRef, handleToggle };

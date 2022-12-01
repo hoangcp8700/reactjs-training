@@ -144,7 +144,7 @@ const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus }) => {
 };
 
 const Header: React.FC<HeaderContainerProps> = ({ logo, menus }) => {
-  const { isDesktop } = useDeviceQueries();
+  const { isTablet } = useDeviceQueries();
   const [isScroll, setIsScroll] = useState(false);
 
   const refPageYOffset = useRef<number>();
@@ -170,8 +170,8 @@ const Header: React.FC<HeaderContainerProps> = ({ logo, menus }) => {
           isScroll && "translate-y-[-1000px]",
         )}
       >
-        {isDesktop && <NavSearch />}
-        {isDesktop ? (
+        {!isTablet && <NavSearch />}
+        {!isTablet ? (
           <HeaderDesktop logo={logo} menus={menus} />
         ) : (
           <HeaderTablet logo={logo} menus={menus} />

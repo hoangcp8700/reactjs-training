@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 
 const smallMobileMediaQuery = window.matchMedia("(max-width: 576px)");
 const mobileMediaQuery = window.matchMedia("(max-width: 768px)");
-const tabletMediaQuery = window.matchMedia("(max-width: 1200px)");
-const desktopMediaQuery = window.matchMedia("(min-width: 1199px)");
+const tabletMediaQuery = window.matchMedia("(max-width: 1025px)");
+const desktopMediaQuery = window.matchMedia("(min-width: 1024px)");
 
 export default function useDeviceQueries() {
   const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 576);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isTablet, setIsTablet] = useState(window.innerWidth <= 1200);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1199);
+  const [isTablet, setIsTablet] = useState(window.innerWidth <= 1025);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
 
   useEffect(() => {
     const querySmallMobileChanged = (e: MediaQueryListEvent) => {
