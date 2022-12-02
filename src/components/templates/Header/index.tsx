@@ -4,13 +4,14 @@ import Text from "components/atoms/Text";
 import Container from "components/common/Container";
 import useDeviceQueries from "hooks/useDeviceQueries";
 import useWindowEvents from "hooks/useWindowEvents";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { MenuHeaderType } from "api/menus/types";
 import { CONSTANT_ROUTE } from "routes/constants";
 import { baseSlug } from "utils/functions";
 import IconButton from "components/atoms/IconButton";
 import clsx from "clsx";
 import { IconName } from "components/atoms/Icon";
+import { useAuthenticate } from "context/AuthenticateContext";
 
 import NavSearch from "./NavSearch";
 import { SubMenuDesktop, SubMenuTablet } from "./SubMenu";
@@ -26,24 +27,33 @@ interface HeaderProps {
 }
 interface HeaderContainerProps extends HeaderProps {}
 
-const listIconHeaderDummy = [
-  {
-    iconName: "user",
-    linkProps: {
-      href: baseSlug(CONSTANT_ROUTE.VI.LOGIN),
-    },
-  },
-  {
-    iconName: "heartFill",
-  },
-  {
-    iconName: "cartShopping",
-  },
-];
+const language = "VI";
 
 const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus }) => {
   const [idxHover, setIdxHover] = useState(-1);
-
+  const { isAuth } = useAuthenticate();
+  const listIconHeaderDummy = useMemo(
+    () => [
+      {
+        iconName: "user",
+        linkProps: {
+          href: isAuth
+            ? baseSlug(CONSTANT_ROUTE[language].LOGOUT)
+            : baseSlug(CONSTANT_ROUTE[language].LOGIN),
+        },
+      },
+      {
+        iconName: "heartFill",
+      },
+      {
+        iconName: "cartShopping",
+        linkProps: {
+          href: baseSlug(CONSTANT_ROUTE[language].CART),
+        },
+      },
+    ],
+    [isAuth],
+  );
   return (
     <HeaderBody onMouseLeave={() => setIdxHover(-1)}>
       <Container>
@@ -80,7 +90,7 @@ const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus }) => {
                 key={`icon-header-desktop-${idx.toString()}`}
                 size={16}
                 iconName={ele.iconName as IconName}
-                linkProps={{ href: baseSlug(CONSTANT_ROUTE.VI.LOGIN) }}
+                linkProps={ele.linkProps}
                 buttonProps={{ className: "shadow-none" }}
                 className={idx < listIconHeaderDummy.length - 1 ? "mr-1 lg:mr-6" : ""}
               />
@@ -128,7 +138,7 @@ const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus }) => {
                   key={`icon-header-desktop-${idx.toString()}`}
                   size={16}
                   iconName={ele.iconName as IconName}
-                  linkProps={{ href: baseSlug(CONSTANT_ROUTE.VI.LOGIN) }}
+                  linkProps={ele.linkProps}
                   buttonProps={{ className: "shadow-none" }}
                   className={idx < listIconHeaderDummy.length - 1 ? "mr-1 lg:mr-6" : ""}
                 />

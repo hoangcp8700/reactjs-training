@@ -19,7 +19,7 @@ const Login: React.FC<LayoutAuthenticationProps<LoginFormProps>> = ({
   isLoading,
 }) => (
   <FormProviderContainer method={methods} onSubmit={onSubmit} id='form-login'>
-    <FormControl name='user'>
+    <FormControl name='userName'>
       {({ field, fieldState: { error } }) => (
         <Input
           {...field}

@@ -1,11 +1,12 @@
+import { useMutation } from "@tanstack/react-query";
 import AuthenticateAPI from "api/authentication";
-import { AuthProfileProps, LoginFormProps } from "api/authentication/type";
-import { setAccessToken } from "api/common/storage";
-import React, { createContext, useContext, useMemo, useState } from "react";
+import { AuthProfileProps } from "api/authentication/type";
+import { getAccessToken } from "api/common/storage";
+import Loading from "components/atoms/Loading";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 type AuthenticateContextType = {
-  profile: () => void;
-  login: (data: LoginFormProps) => Promise<boolean>;
+  login: () => void;
   logout: () => void;
   isAuth: boolean;
   user?: AuthProfileProps | object | null;
@@ -25,26 +26,23 @@ export const useAuthenticate = () => useContext(AuthenticateContext);
 const AuthenticateProvider: React.FC<AuthenticateProviderProps> = ({ children }) => {
   const [user, setUser] = useState<object | null>(null);
   const [isAuth, setIsAuth] = useState(false);
+  const token = useMemo(() => getAccessToken(), []);
 
-  const profile = async () => {
-    try {
-      const response = await AuthenticateAPI.PROFILE();
-      setUser(response);
-      setIsAuth(true);
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
+  const { mutate: onFetch, isLoading } = useMutation(AuthenticateAPI.PROFILE);
 
-  const login = async (data: LoginFormProps) => {
-    try {
-      const response = await AuthenticateAPI.LOGIN(data);
-      setAccessToken(response.data.accessToken);
-      return true;
-    } catch (error) {
-      return false;
+  useEffect(() => {
+    if (token) {
+      onFetch(undefined, {
+        onSuccess: (res) => {
+          setUser(res);
+          setIsAuth(true);
+        },
+      });
     }
+  }, [onFetch, token]);
+
+  const login = () => {
+    setIsAuth(true);
   };
 
   const logout = () => {
@@ -56,13 +54,15 @@ const AuthenticateProvider: React.FC<AuthenticateProviderProps> = ({ children })
     () => ({
       user,
       isAuth,
-      profile,
       login,
       logout,
     }),
     [isAuth, user],
   );
 
+  if (isLoading) {
+    return <Loading fullScreen />;
+  }
   return <AuthenticateContext.Provider value={value}>{children}</AuthenticateContext.Provider>;
 };
 

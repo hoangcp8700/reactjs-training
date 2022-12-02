@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams, useSearchParams } from "react-router-dom";
 import Error from "pages/Error";
 import Loading from "components/atoms/Loading";
+import { useAuthenticate } from "context/AuthenticateContext";
 
 import TEMPLATE_PAGE, { RoutePathItemProps } from "./paths";
 import { CONSTANT_ROUTE } from "./constants";
 
 // NOTE: important!!!
-const isAuth = false;
 const langCurrent = "VI";
 
 const PageNavigation: React.FC = () => {
-  console.log("runnnn");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const { slug } = useParams<{ slug: string }>();
+  const { isAuth } = useAuthenticate();
+  console.log("🚀PageNavigation", isAuth, searchParams, location);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [pageData, setPageData] = useState<RoutePathItemProps>();
@@ -46,6 +49,7 @@ const PageNavigation: React.FC = () => {
   // page is private + need check authenticate and not login => redirect login
   // ex: Cart page
   if (pageData.private && pageData.authenticate && !isAuth) {
+    setSearchParams(location.pathname);
     return <Navigate to={`/${CONSTANT_ROUTE[langCurrent].LOGIN}`} replace />;
   }
 

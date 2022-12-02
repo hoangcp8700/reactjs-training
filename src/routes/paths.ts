@@ -3,7 +3,7 @@ import React, { lazy } from "react";
 
 import { CONSTANT_ROUTE } from "./constants";
 
-const AboutUs = lazy(() => import("pages/AboutUs"));
+const AboutUs = lazy(() => import("pages/Test"));
 const Cart = lazy(() => import("pages/Cart"));
 
 // ------- authentication page --------------

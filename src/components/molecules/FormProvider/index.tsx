@@ -33,7 +33,7 @@ export const ButtonSubmitControl: React.FC<ButtonSubmitControlProps> = ({
 }) => (
   <div className='ml-auto mt-5 w-fit'>
     {children}
-    <Button type='submit' variants='primary' className='ml-auto min-w-[150px]'>
+    <Button type='submit' variants='primary' className='ml-auto min-w-[150px]' disabled={isLoading}>
       {isLoading && <Icon iconName='loading' size={24} />}
       <Text className='text-sm font-semibold !text-white'>{btnSubmitText}</Text>
     </Button>
