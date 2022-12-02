@@ -31,6 +31,7 @@ const AuthenticateProvider: React.FC<AuthenticateProviderProps> = ({ children })
   const { mutate: onFetch, isLoading } = useMutation(AuthenticateAPI.PROFILE);
 
   useEffect(() => {
+    // FIRST PAGE : CHECK TOKEN
     if (token) {
       onFetch(undefined, {
         onSuccess: (res) => {

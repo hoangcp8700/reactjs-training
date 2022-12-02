@@ -9,21 +9,17 @@ import { useQuery } from "@tanstack/react-query";
 import ProductAPI from "api/product";
 import { convertDollarToVN } from "utils/format";
 import Container from "components/common/Container";
+import Loading from "components/atoms/Loading";
 
 const ProductDetailContainer: React.FC = () => {
   const params = useParams();
 
-  const productID = useMemo(() => {
-    if (params.slug) {
-      return getIdBySlug(params.slug, "i");
-    }
-    return "";
-  }, [params]);
+  const productID = useMemo(() => (params.slug ? getIdBySlug(params.slug, "i") : ""), [params]);
 
   const [color, setColor] = useState<ColorType>();
   const [size, setSize] = useState<number>(-1);
 
-  const { data: productDetailResponse } = useQuery(
+  const { data: productDetailResponse, isLoading } = useQuery(
     ["getProductDetail"],
     () => ProductAPI.GET_DETAIL(productID),
     {
@@ -41,22 +37,12 @@ const ProductDetailContainer: React.FC = () => {
           productDetailResponse.price + productDetailResponse.discountPercentage,
         ),
         stock: productDetailResponse.stock,
-        // listThumbnail: productDetailResponse.images.map((ele, idx) => ({
-        //   src: ele,
-        //   alt: `${productDetailResponse.title}-${idx.toString()}`,
-        // })),
         thumbnail: productDetailResponse.images.map((ele, idx) => ({
           src: ele,
           alt: `${productDetailResponse.title}-${idx.toString()}`,
         }))[0],
         description: productDetailResponse.description,
         reviews: [
-          // {
-          //   count: 12,
-          //   title: "",
-          //   prefix: "prefix",
-          //   active: true,
-          // },
           {
             count: 222,
             title: "Đã bán",
@@ -74,6 +60,10 @@ const ProductDetailContainer: React.FC = () => {
     }
     return undefined;
   }, [productDetailResponse]);
+
+  if (isLoading) {
+    return <Loading fullScreen />;
+  }
 
   if (!productID || !productDetailData) {
     return <RedirectError />;
