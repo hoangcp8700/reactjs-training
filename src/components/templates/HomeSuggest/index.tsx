@@ -34,8 +34,8 @@ const HomeSuggest: React.FC<HomeSuggestProps> = ({
   const { setNode } = useScrollInfinite(onMore);
   const { isMobile } = useDeviceQueries();
   return (
-    <div className='t-homeSuggest'>
-      <Container>
+    <div>
+      <Container className='t-homeSuggest my-10'>
         <>
           <Tabs className='tab' indexActive={active || 0} classTabsActive='home-suggest-active'>
             {tabs.map((item, idx) => (

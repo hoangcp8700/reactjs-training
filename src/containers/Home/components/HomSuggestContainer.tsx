@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import ProductAPI from "api/product";
 import { CONSTANT_ROUTE } from "routes/constants";
 import { convertDollarToVN } from "utils/format";
-import { slugify } from "utils/functions";
+import { getShuffledArr, slugify } from "utils/functions";
 
 const tabsDummy = [
   {
@@ -105,6 +105,11 @@ const HomeSuggestContainer: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slugCategory, tabsDummy]);
 
+  const randomProductData = useMemo(() => 
+     getShuffledArr<CardProductProps>(productData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  , [tabActive, productData]);
+
   const handleChangeTab = useCallback(
     (tab: number) => {
       setSearchParams(`${CONSTANT_ROUTE[language].CATEGORY}=${tabsDummy[tab].url}`);
@@ -114,7 +119,7 @@ const HomeSuggestContainer: React.FC = () => {
 
   return (
     <HomeSuggest
-      products={productData}
+      products={randomProductData}
       noData='Không có sản phẩm nào'
       tabs={tabsDummy}
       active={tabActive}

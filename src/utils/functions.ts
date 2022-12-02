@@ -73,4 +73,14 @@ export const getIdBySlug = (str: string, key: string) => {
   return "";
 };
 
+// random array
+export function getShuffledArr<T>(arr: Array<T>) {
+  return [...arr].map((_, i, arrCopy: Array<T>) => {
+    const rand = i + Math.floor(Math.random() * (arrCopy.length - i));
+    // eslint-disable-next-line no-param-reassign
+    [arrCopy[rand], arrCopy[i]] = [arrCopy[i], arrCopy[rand]];
+    return arrCopy[i];
+  });
+}
+
 export default undefined;
