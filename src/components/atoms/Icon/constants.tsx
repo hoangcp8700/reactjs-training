@@ -8,6 +8,10 @@ import { ReactComponent as User } from "assets/icons/ic_user.svg";
 import { ReactComponent as CartShopping } from "assets/icons/ic_cart_shopping.svg";
 import { ReactComponent as Hamburger } from "assets/icons/ic_hamburger.svg";
 import { ReactComponent as CartAdd } from "assets/icons/ic_cart_add.svg";
+import { ReactComponent as Success } from "assets/icons/ic_success.svg";
+import { ReactComponent as Error } from "assets/icons/ic_error.svg";
+import { ReactComponent as Warning } from "assets/icons/ic_warning.svg";
+import { ReactComponent as Logout } from "assets/icons/ic_logout.svg";
 
 const ICON_LISTS = {
   search: Search,
@@ -20,9 +24,10 @@ const ICON_LISTS = {
   cartShopping: CartShopping,
   hamburger: Hamburger,
   cartAdd: CartAdd,
-  success: Close,
-  warning: Close,
-  error: Close,
+  success: Success,
+  warning: Warning,
+  error: Error,
+  logout: Logout,
 };
 
 export default ICON_LISTS;

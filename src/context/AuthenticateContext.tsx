@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import AuthenticateAPI from "api/authentication";
 import { AuthProfileProps } from "api/authentication/type";
-import { getAccessToken } from "api/common/storage";
+import { getAccessToken, removeAccessToken } from "api/common/storage";
 import Loading from "components/atoms/Loading";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
@@ -48,6 +48,7 @@ const AuthenticateProvider: React.FC<AuthenticateProviderProps> = ({ children })
   const logout = () => {
     setUser(null);
     setIsAuth(false);
+    removeAccessToken();
   };
 
   const value = useMemo(

@@ -7,6 +7,7 @@ const AboutUs = lazy(() => import("pages/Test"));
 const Cart = lazy(() => import("pages/Cart"));
 
 // ------- authentication page --------------
+const Logout = lazy(() => import("pages/Authentication/Logout"));
 const Login = lazy(() => import("pages/Authentication/Login"));
 const Register = lazy(() => import("pages/Authentication/Register"));
 const ForgotPassword = lazy(() => import("pages/Authentication/ForgotPassword"));
@@ -31,6 +32,11 @@ const TEMPLATE_PAGE: RoutePathItemProps[] = [
     authenticate: true,
   },
   // authentication
+  {
+    paths: [CONSTANT_ROUTE.EN.LOGOUT, CONSTANT_ROUTE.VI.LOGOUT],
+    component: Logout,
+    private: false,
+  },
   {
     paths: [CONSTANT_ROUTE.EN.LOGIN, CONSTANT_ROUTE.VI.LOGIN],
     component: Login,

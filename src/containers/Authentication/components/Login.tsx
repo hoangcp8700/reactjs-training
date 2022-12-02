@@ -4,9 +4,9 @@ import AuthenticateAPI from "api/authentication";
 import { LoginFormProps } from "api/authentication/type";
 import { toastSingleMode } from "components/molecules/Toast";
 import FormAuthentication from "components/organisms/FormAuthentication";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { CONSTANT_ROUTE } from "routes/constants";
 import { ERROR_GENERAL } from "utils/constants";
 import { baseSlug } from "utils/functions";
@@ -21,7 +21,22 @@ interface LoginContainerProps {}
 const language = "VI";
 
 const LoginContainer: React.FC<LoginContainerProps> = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.from) {
+      setSearchParams({ next: location.state?.from });
+    }
+  }, [location.state?.from, setSearchParams]);
+
+  // Get redirect location or provide fallback
+  const redirectLocationBefore = useMemo(
+    () => searchParams.get("next") || baseSlug(CONSTANT_ROUTE[language].HOME),
+    [searchParams],
+  );
+
   const { login } = useAuthenticate();
 
   const methods = useForm<UseFormHookType<LoginFormProps>>({
@@ -48,12 +63,12 @@ const LoginContainer: React.FC<LoginContainerProps> = () => {
             type: "success",
             once: true,
           });
-          navigate(baseSlug(CONSTANT_ROUTE[language].HOME));
+          navigate(redirectLocationBefore);
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error: any) => {
           if (error) {
-            console.log(error);
+            console.log("login submit", error);
             toastSingleMode({
               message: "Đăng nhập thất bại",
               type: "error",
@@ -69,7 +84,7 @@ const LoginContainer: React.FC<LoginContainerProps> = () => {
         },
       });
     },
-    [methods, login, navigate, handleSubmit],
+    [redirectLocationBefore, methods, login, navigate, handleSubmit],
   );
 
   return (

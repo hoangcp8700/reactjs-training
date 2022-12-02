@@ -1,5 +1,5 @@
 import Image from "components/atoms/Image";
-import Link from "components/atoms/Link";
+import Link, { LinkProps } from "components/atoms/Link";
 import Text from "components/atoms/Text";
 import Container from "components/common/Container";
 import useDeviceQueries from "hooks/useDeviceQueries";
@@ -19,6 +19,10 @@ import { HeaderBody } from "./style";
 
 interface HeaderProps {
   menus: MenuHeaderType[];
+  subMenu?: {
+    iconName: IconName;
+    linkProp?: LinkProps;
+  }[];
   logo: {
     imgSrc: string;
     alt: string;
@@ -27,33 +31,8 @@ interface HeaderProps {
 }
 interface HeaderContainerProps extends HeaderProps {}
 
-const language = "VI";
-
-const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus }) => {
+const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus, subMenu }) => {
   const [idxHover, setIdxHover] = useState(-1);
-  const { isAuth } = useAuthenticate();
-  const listIconHeaderDummy = useMemo(
-    () => [
-      {
-        iconName: "user",
-        linkProps: {
-          href: isAuth
-            ? baseSlug(CONSTANT_ROUTE[language].LOGOUT)
-            : baseSlug(CONSTANT_ROUTE[language].LOGIN),
-        },
-      },
-      {
-        iconName: "heartFill",
-      },
-      {
-        iconName: "cartShopping",
-        linkProps: {
-          href: baseSlug(CONSTANT_ROUTE[language].CART),
-        },
-      },
-    ],
-    [isAuth],
-  );
   return (
     <HeaderBody onMouseLeave={() => setIdxHover(-1)}>
       <Container>
@@ -85,16 +64,16 @@ const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus }) => {
             </ul>
           </div>
           <div className='adjust-flex-center'>
-            {listIconHeaderDummy.map((ele, idx) => (
-              <IconButton
-                key={`icon-header-desktop-${idx.toString()}`}
-                size={16}
-                iconName={ele.iconName as IconName}
-                linkProps={ele.linkProps}
-                buttonProps={{ className: "shadow-none" }}
-                className={idx < listIconHeaderDummy.length - 1 ? "mr-1 lg:mr-6" : ""}
-              />
-            ))}
+            {subMenu &&
+              subMenu.map((ele, idx) => (
+                <IconButton
+                  key={`icon-header-desktop-${idx.toString()}`}
+                  size={16}
+                  buttonProps={{ className: "shadow-none" }}
+                  className={idx < subMenu.length - 1 ? "mr-1 lg:mr-6" : ""}
+                  {...ele}
+                />
+              ))}
           </div>
         </div>
       </Container>
@@ -107,7 +86,7 @@ const HeaderDesktop: React.FC<HeaderProps> = ({ logo, menus }) => {
   );
 };
 
-const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus }) => {
+const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus, subMenu }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -133,16 +112,16 @@ const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus }) => {
               </div>
             </div>
             <div className='absolute right-0 adjust-flex-center'>
-              {listIconHeaderDummy.map((ele, idx) => (
-                <IconButton
-                  key={`icon-header-desktop-${idx.toString()}`}
-                  size={16}
-                  iconName={ele.iconName as IconName}
-                  linkProps={ele.linkProps}
-                  buttonProps={{ className: "shadow-none" }}
-                  className={idx < listIconHeaderDummy.length - 1 ? "mr-1 lg:mr-6" : ""}
-                />
-              ))}
+              {subMenu &&
+                subMenu.map((ele, idx) => (
+                  <IconButton
+                    key={`icon-header-desktop-${idx.toString()}`}
+                    size={16}
+                    buttonProps={{ className: "shadow-none" }}
+                    className={idx < subMenu.length - 1 ? "mr-1 lg:mr-6" : ""}
+                    {...ele}
+                  />
+                ))}
             </div>
           </div>
         </Container>
@@ -153,9 +132,12 @@ const HeaderTablet: React.FC<HeaderProps> = ({ logo, menus }) => {
   );
 };
 
+const language = "VI";
+
 const Header: React.FC<HeaderContainerProps> = ({ logo, menus }) => {
   const { isTablet } = useDeviceQueries();
   const [isScroll, setIsScroll] = useState(false);
+  const { isAuth } = useAuthenticate();
 
   const refPageYOffset = useRef<number>();
 
@@ -172,6 +154,28 @@ const Header: React.FC<HeaderContainerProps> = ({ logo, menus }) => {
     [],
   );
 
+  const listIconHeaderDummy = useMemo(
+    () => [
+      {
+        iconName: (isAuth ? "logout" : "user") as IconName,
+        linkProps: {
+          href: isAuth
+            ? baseSlug(CONSTANT_ROUTE[language].LOGOUT)
+            : baseSlug(CONSTANT_ROUTE[language].LOGIN),
+        },
+      },
+      {
+        iconName: "heartFill" as IconName,
+      },
+      {
+        iconName: "cartShopping" as IconName,
+        linkProps: {
+          href: baseSlug(CONSTANT_ROUTE[language].CART),
+        },
+      },
+    ],
+    [isAuth],
+  );
   return (
     <header className={clsx("fixed top-0 w-full z-header ")}>
       <nav
@@ -182,9 +186,9 @@ const Header: React.FC<HeaderContainerProps> = ({ logo, menus }) => {
       >
         {!isTablet && <NavSearch />}
         {!isTablet ? (
-          <HeaderDesktop logo={logo} menus={menus} />
+          <HeaderDesktop logo={logo} menus={menus} subMenu={listIconHeaderDummy} />
         ) : (
-          <HeaderTablet logo={logo} menus={menus} />
+          <HeaderTablet logo={logo} menus={menus} subMenu={listIconHeaderDummy} />
         )}
       </nav>
     </header>
