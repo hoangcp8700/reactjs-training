@@ -30,7 +30,7 @@ export const ButtonSubmitControl: React.FC<ButtonSubmitControlProps> = ({
   <div className='ml-auto mt-5 w-fit'>
     {children}
     <Button type='submit' variants='primary' className='ml-auto min-w-[150px]'>
-      <Text className='text-sm font-semibold text-white'>{btnSubmitText}</Text>
+      <Text className='text-sm font-semibold !text-white'>{btnSubmitText}</Text>
     </Button>
   </div>
 );

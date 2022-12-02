@@ -1,106 +1,102 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { RegisterFormProps } from "api/authentication/type";
 import Input from "components/atoms/Input";
 import FormProviderContainer, {
   ButtonSubmitControl,
   FormControl,
 } from "components/molecules/FormProvider";
 import React from "react";
-import { useForm } from "react-hook-form";
-import { registerSchema } from "utils/schemas";
 
-export interface RegisterFormProps {
-  fullName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-}
+import { LayoutAuthenticationProps } from "./Layout";
 
-interface IProps {
-  btnSubmit: string;
-  handleSubmit: (form: RegisterFormProps) => void;
-}
+const Register: React.FC<LayoutAuthenticationProps<RegisterFormProps>> = ({
+  onSubmit,
+  methods,
+  btnSubmit,
+}) => (
+  <FormProviderContainer method={methods} onSubmit={onSubmit} id='form-register'>
+    <FormControl name='userName'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='userName'
+          label='Tài khoản'
+          required
+          error={error?.message}
+          placeholder='Nhập tài khoản'
+        />
+      )}
+    </FormControl>
 
-const Register: React.FC<IProps> = ({ btnSubmit, handleSubmit }) => {
-  const method = useForm<RegisterFormProps>({
-    defaultValues: {
-      fullName: "",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-    },
-    resolver: yupResolver(registerSchema),
-    mode: "onSubmit",
-  });
+    <FormControl name='email'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='email'
+          label='Email'
+          type='email'
+          required
+          error={error?.message}
+          placeholder='Nhập Email'
+        />
+      )}
+    </FormControl>
 
-  const onSubmit = async (data: RegisterFormProps) => {
-    try {
-      await handleSubmit(data);
-      method.reset();
-    } catch (error) {
-      console.log("error submit form register", error);
-    }
-  };
+    <FormControl name='fullName'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='fullName'
+          label='Họ tên'
+          required
+          error={error?.message}
+          placeholder='Nhập họ tên'
+        />
+      )}
+    </FormControl>
 
-  return (
-    <FormProviderContainer method={method} onSubmit={onSubmit} id='form-register'>
-      <FormControl name='fullName'>
-        {({ field, fieldState: { error } }) => (
-          <Input
-            {...field}
-            id='fullName'
-            label='Họ tên'
-            required
-            error={error?.message}
-            placeholder='Nhập họ tên'
-          />
-        )}
-      </FormControl>
+    <FormControl name='phone'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='phone'
+          label='Số điện thoại'
+          required
+          error={error?.message}
+          placeholder='Nhập số điện thoại'
+        />
+      )}
+    </FormControl>
 
-      <FormControl name='email'>
-        {({ field, fieldState: { error } }) => (
-          <Input
-            {...field}
-            id='email'
-            label='Email'
-            type='email'
-            required
-            error={error?.message}
-            placeholder='Nhập email'
-          />
-        )}
-      </FormControl>
+    <FormControl name='password'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='password'
+          type='password'
+          label='Mật khẩu'
+          required
+          error={error?.message}
+          placeholder='Nhập mật khẩu'
+        />
+      )}
+    </FormControl>
 
-      <FormControl name='password'>
-        {({ field, fieldState: { error } }) => (
-          <Input
-            {...field}
-            id='password'
-            type='password'
-            label='Mật khẩu'
-            required
-            error={error?.message}
-            placeholder='Nhập mật khẩu'
-          />
-        )}
-      </FormControl>
+    <FormControl name='passwordConfirmation'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='passwordConfirmation'
+          type='password'
+          label='Xác nhận mật khẩu'
+          required
+          error={error?.message}
+          placeholder='Xác nhận mật khẩu'
+        />
+      )}
+    </FormControl>
 
-      <FormControl name='passwordConfirmation'>
-        {({ field, fieldState: { error } }) => (
-          <Input
-            {...field}
-            id='passwordConfirmation'
-            type='password'
-            label='Xác nhận mật khẩu'
-            required
-            error={error?.message}
-            placeholder='Xác nhận mật khẩu'
-          />
-        )}
-      </FormControl>
-
-      <ButtonSubmitControl btnSubmitText={btnSubmit} />
-    </FormProviderContainer>
-  );
-};
+    <ButtonSubmitControl btnSubmitText={btnSubmit} />
+  </FormProviderContainer>
+);
 
 export default Register;

@@ -1,75 +1,62 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { ResetPasswordFormProps } from "api/authentication/type";
 import Input from "components/atoms/Input";
 import FormProviderContainer, {
   ButtonSubmitControl,
   FormControl,
 } from "components/molecules/FormProvider";
 import React from "react";
-import { useForm } from "react-hook-form";
-import { resetPasswordSchema } from "utils/schemas";
 
-export interface ResetPasswordFormProps {
-  password: string;
-  passwordConfirmation: string;
-}
+import { LayoutAuthenticationProps } from "./Layout";
 
-interface IProps {
-  btnSubmit: string;
-  handleSubmit: (form: ResetPasswordFormProps) => void;
-}
+const ResetPassword: React.FC<LayoutAuthenticationProps<ResetPasswordFormProps>> = ({
+  onSubmit,
+  methods,
+  btnSubmit,
+}) => (
+  <FormProviderContainer method={methods} onSubmit={onSubmit} id='form-reset-password'>
+    <FormControl name='code'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='code'
+          type='Code'
+          label='Code'
+          required
+          error={error?.message}
+          placeholder='Nhập code'
+        />
+      )}
+    </FormControl>
+    <FormControl name='password'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='password'
+          type='password'
+          label='Mật khẩu'
+          required
+          error={error?.message}
+          placeholder='Nhập mật khẩu'
+        />
+      )}
+    </FormControl>
 
-const ResetPassword: React.FC<IProps> = ({ btnSubmit, handleSubmit }) => {
-  const method = useForm<ResetPasswordFormProps>({
-    defaultValues: {
-      password: "",
-      passwordConfirmation: "",
-    },
-    resolver: yupResolver(resetPasswordSchema),
-    mode: "onSubmit",
-  });
+    <FormControl name='passwordConfirmation'>
+      {({ field, fieldState: { error } }) => (
+        <Input
+          {...field}
+          id='passwordConfirmation'
+          type='password'
+          label='Xác nhận mật khẩu'
+          required
+          error={error?.message}
+          placeholder='Xác nhận mật khẩu'
+        />
+      )}
+    </FormControl>
 
-  const onSubmit = async (data: ResetPasswordFormProps) => {
-    try {
-      await handleSubmit(data);
-      method.reset();
-    } catch (error) {
-      console.log("error submit form ResetPassword", error);
-    }
-  };
-
-  return (
-    <FormProviderContainer method={method} onSubmit={onSubmit} id='form-reset-password'>
-      <FormControl name='password'>
-        {({ field, fieldState: { error } }) => (
-          <Input
-            {...field}
-            id='password'
-            type='password'
-            label='Mật khẩu'
-            required
-            error={error?.message}
-            placeholder='Nhập mật khẩu'
-          />
-        )}
-      </FormControl>
-
-      <FormControl name='passwordConfirmation'>
-        {({ field, fieldState: { error } }) => (
-          <Input
-            {...field}
-            id='passwordConfirmation'
-            type='password'
-            label='Xác nhận mật khẩu'
-            required
-            error={error?.message}
-            placeholder='Xác nhận mật khẩu'
-          />
-        )}
-      </FormControl>
-
-      <ButtonSubmitControl btnSubmitText={btnSubmit} />
-    </FormProviderContainer>
-  );
-};
+    <ButtonSubmitControl btnSubmitText={btnSubmit} />
+  </FormProviderContainer>
+);
 
 export default ResetPassword;

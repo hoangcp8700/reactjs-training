@@ -10,6 +10,10 @@ export function baseSlug(slug: string, isAuth?: boolean) {
   return `/${slug}`;
 }
 
+export function getKeyValue<T>(key: keyof T, object: T) {
+  return object[key];
+}
+
 export function renderMoney(val?: number, prefix?: string, unit?: string) {
   const converted = val?.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, prefix || ".");
   return unit ? `${converted} ${unit}` : converted;

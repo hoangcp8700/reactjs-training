@@ -4,6 +4,7 @@ import Link from "components/atoms/Link";
 import Text from "components/atoms/Text";
 import Container from "components/common/Container";
 import React from "react";
+import { FieldValues, UseFormReturn } from "react-hook-form";
 import STYLES from "styles";
 
 interface FormAuthenticationStyleProps {
@@ -19,6 +20,11 @@ interface FormAuthenticationProps extends FormAuthenticationStyleProps {
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: React.ReactNode;
+}
+export interface LayoutAuthenticationProps<T extends FieldValues> {
+  onSubmit: (form: T) => void;
+  btnSubmit: string;
+  methods: UseFormReturn<T>;
 }
 
 const FormWrapper = styled.div<FormAuthenticationStyleProps>((props) => ({
@@ -38,9 +44,9 @@ const FormAuthenticationLayout: React.FC<FormAuthenticationProps> = ({
   children,
   background,
 }) => (
-  <FormWrapper className='bg-no-repeat bg-cover' background={background}>
+  <FormWrapper className='bg-no-repeat bg-cover py-10' background={background}>
     <Container>
-      <FormBody className='flex flex-col justify-center h-screen'>
+      <FormBody className='flex flex-col justify-center h-full'>
         <div className='flex items-center justify-center flex-col'>
           {subTitle && (
             <div className='mb-2'>
@@ -61,7 +67,7 @@ const FormAuthenticationLayout: React.FC<FormAuthenticationProps> = ({
               </div>
 
               <Link href={description.link.href} target={description.link.target}>
-                <Text className='text-sm text-red-500 font-semibold' type='span'>
+                <Text className='text-sm !text-red-500 font-semibold' type='span'>
                   {description.link.text}
                 </Text>
               </Link>

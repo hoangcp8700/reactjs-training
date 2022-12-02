@@ -10,7 +10,6 @@ export const CONSTANT_ROUTE = {
     REGISTER: "register",
     FORGOT_PASSWORD: "forgot-password",
     RESET_PASSWORD: "reset-password",
-    VERIFY: "verify",
   },
   VI: {
     HOME: "",
@@ -23,6 +22,5 @@ export const CONSTANT_ROUTE = {
     REGISTER: "dang-ky",
     FORGOT_PASSWORD: "quen-mat-khau",
     RESET_PASSWORD: "cap-nhap-mat-khau",
-    VERIFY: "ma-hoa",
   },
 };

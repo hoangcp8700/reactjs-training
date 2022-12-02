@@ -8,6 +8,10 @@ export const LOCAL_STORAGE = {
   THEME: "THEME",
 };
 
+export const ERROR_GENERAL = "ERROR_GENERAL";
+
+export const proxyAPI = "http://monozon-node.herokuapp.com";
+
 export const THEME_MODE_OPTIONS = {
   darkMode: "darkMode",
   lightMode: "lightMode",

@@ -9,7 +9,6 @@ const Cart = lazy(() => import("pages/Cart"));
 // ------- authentication page --------------
 const Login = lazy(() => import("pages/Authentication/Login"));
 const Register = lazy(() => import("pages/Authentication/Register"));
-const Verify = lazy(() => import("pages/Authentication/Verify"));
 const ForgotPassword = lazy(() => import("pages/Authentication/ForgotPassword"));
 const ResetPassword = lazy(() => import("pages/Authentication/ResetPassword"));
 export interface RoutePathItemProps {
@@ -46,11 +45,6 @@ const TEMPLATE_PAGE: RoutePathItemProps[] = [
   {
     paths: [CONSTANT_ROUTE.EN.FORGOT_PASSWORD, CONSTANT_ROUTE.VI.FORGOT_PASSWORD],
     component: ForgotPassword,
-    private: false,
-  },
-  {
-    paths: [CONSTANT_ROUTE.EN.VERIFY, CONSTANT_ROUTE.VI.VERIFY],
-    component: Verify,
     private: false,
   },
   {
