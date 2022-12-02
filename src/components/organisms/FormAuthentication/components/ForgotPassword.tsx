@@ -12,6 +12,7 @@ const ForgotPassword: React.FC<LayoutAuthenticationProps<ForgotPasswordFormProps
   onSubmit,
   methods,
   btnSubmit,
+  isLoading,
 }) => (
   <FormProviderContainer method={methods} onSubmit={onSubmit} id='form-forgot-password'>
     <FormControl name='email'>
@@ -28,7 +29,7 @@ const ForgotPassword: React.FC<LayoutAuthenticationProps<ForgotPasswordFormProps
       )}
     </FormControl>
 
-    <ButtonSubmitControl btnSubmitText={btnSubmit} />
+    <ButtonSubmitControl isLoading={isLoading} btnSubmitText={btnSubmit} />
   </FormProviderContainer>
 );
 

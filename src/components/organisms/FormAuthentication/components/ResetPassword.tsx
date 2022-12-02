@@ -12,6 +12,7 @@ const ResetPassword: React.FC<LayoutAuthenticationProps<ResetPasswordFormProps>>
   onSubmit,
   methods,
   btnSubmit,
+  isLoading,
 }) => (
   <FormProviderContainer method={methods} onSubmit={onSubmit} id='form-reset-password'>
     <FormControl name='code'>
@@ -55,7 +56,7 @@ const ResetPassword: React.FC<LayoutAuthenticationProps<ResetPasswordFormProps>>
       )}
     </FormControl>
 
-    <ButtonSubmitControl btnSubmitText={btnSubmit} />
+    <ButtonSubmitControl btnSubmitText={btnSubmit} isLoading={isLoading} />
   </FormProviderContainer>
 );
 

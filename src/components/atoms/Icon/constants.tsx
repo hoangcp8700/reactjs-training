@@ -20,6 +20,9 @@ const ICON_LISTS = {
   cartShopping: CartShopping,
   hamburger: Hamburger,
   cartAdd: CartAdd,
+  success: Close,
+  warning: Close,
+  error: Close,
 };
 
 export default ICON_LISTS;

@@ -16,17 +16,18 @@ const Login: React.FC<LayoutAuthenticationProps<LoginFormProps>> = ({
   onSubmit,
   methods,
   btnSubmit,
+  isLoading,
 }) => (
   <FormProviderContainer method={methods} onSubmit={onSubmit} id='form-login'>
     <FormControl name='user'>
       {({ field, fieldState: { error } }) => (
         <Input
           {...field}
-          id='user'
+          id='userName'
           label='Tài khoản'
           required
           error={error?.message}
-          placeholder='Nhập số điện thoại hoặc email'
+          placeholder='Nhập tài khoản'
         />
       )}
     </FormControl>
@@ -45,10 +46,10 @@ const Login: React.FC<LayoutAuthenticationProps<LoginFormProps>> = ({
       )}
     </FormControl>
 
-    <ButtonSubmitControl btnSubmitText={btnSubmit}>
+    <ButtonSubmitControl btnSubmitText={btnSubmit} isLoading={isLoading}>
       <div className='mb-1.5 text-right'>
-        <Link href={baseSlug(CONSTANT_ROUTE.VI.FORGOT_PASSWORD, true)}>
-          <Text className='text-sm text-red-500'>Quên mật khẩu?</Text>
+        <Link href={baseSlug(CONSTANT_ROUTE.VI.FORGOT_PASSWORD)}>
+          <Text className='text-sm !text-red-500'>Quên mật khẩu?</Text>
         </Link>
       </div>
     </ButtonSubmitControl>

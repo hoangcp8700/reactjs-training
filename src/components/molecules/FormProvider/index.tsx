@@ -4,6 +4,8 @@ import { Controller, FormProvider, UseFormReturn } from "react-hook-form";
 import clsx from "clsx";
 import Button from "components/atoms/Button";
 import Text from "components/atoms/Text";
+import { ERROR_GENERAL } from "utils/constants";
+import Icon from "components/atoms/Icon";
 
 export interface FormProviderContainerProps {
   id?: string;
@@ -21,15 +23,18 @@ interface FormControlProps {
 interface ButtonSubmitControlProps {
   btnSubmitText: string;
   children?: React.ReactNode;
+  isLoading?: boolean;
 }
 
 export const ButtonSubmitControl: React.FC<ButtonSubmitControlProps> = ({
   btnSubmitText,
   children,
+  isLoading,
 }) => (
   <div className='ml-auto mt-5 w-fit'>
     {children}
     <Button type='submit' variants='primary' className='ml-auto min-w-[150px]'>
+      {isLoading && <Icon iconName='loading' size={24} />}
       <Text className='text-sm font-semibold !text-white'>{btnSubmitText}</Text>
     </Button>
   </div>
@@ -50,6 +55,13 @@ const FormProviderContainerRef: React.ForwardRefRenderFunction<
   FormProviderContainerProps
 > = ({ method, id, children, className, onSubmit }, ref) => (
   <FormProvider {...method}>
+    {method.formState.errors && method.formState.errors[ERROR_GENERAL] && (
+      <div className='adjust-flex-center mb-4'>
+        <Text className='text-sm !text-red-500 font-medium'>
+          {method.formState.errors[ERROR_GENERAL].message?.toString()}
+        </Text>
+      </div>
+    )}
     <form
       id={id}
       ref={ref}

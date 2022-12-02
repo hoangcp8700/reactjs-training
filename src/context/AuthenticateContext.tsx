@@ -1,5 +1,5 @@
 import AuthenticateAPI from "api/authentication";
-import { AuthProfileProps, LoginFormProps, RegisterFormProps } from "api/authentication/type";
+import { AuthProfileProps, LoginFormProps } from "api/authentication/type";
 import { setAccessToken } from "api/common/storage";
 import React, { createContext, useContext, useMemo, useState } from "react";
 
@@ -7,9 +7,6 @@ type AuthenticateContextType = {
   profile: () => void;
   login: (data: LoginFormProps) => Promise<boolean>;
   logout: () => void;
-  register: (data: RegisterFormProps) => Promise<boolean>;
-  forgotPassword: () => void;
-  resetPassword: () => void;
   isAuth: boolean;
   user?: AuthProfileProps | object | null;
 };
@@ -50,17 +47,6 @@ const AuthenticateProvider: React.FC<AuthenticateProviderProps> = ({ children })
     }
   };
 
-  const register = async (data: RegisterFormProps) => {
-    try {
-      await AuthenticateAPI.REGISTER(data);
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
-  const forgotPassword = () => {};
-  const resetPassword = () => {};
-
   const logout = () => {
     setUser(null);
     setIsAuth(false);
@@ -73,9 +59,6 @@ const AuthenticateProvider: React.FC<AuthenticateProviderProps> = ({ children })
       profile,
       login,
       logout,
-      register,
-      forgotPassword,
-      resetPassword,
     }),
     [isAuth, user],
   );

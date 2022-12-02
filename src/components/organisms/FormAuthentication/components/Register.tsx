@@ -12,6 +12,7 @@ const Register: React.FC<LayoutAuthenticationProps<RegisterFormProps>> = ({
   onSubmit,
   methods,
   btnSubmit,
+  isLoading,
 }) => (
   <FormProviderContainer method={methods} onSubmit={onSubmit} id='form-register'>
     <FormControl name='userName'>
@@ -95,7 +96,7 @@ const Register: React.FC<LayoutAuthenticationProps<RegisterFormProps>> = ({
       )}
     </FormControl>
 
-    <ButtonSubmitControl btnSubmitText={btnSubmit} />
+    <ButtonSubmitControl isLoading={isLoading} btnSubmitText={btnSubmit} />
   </FormProviderContainer>
 );
 

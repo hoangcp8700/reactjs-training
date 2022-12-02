@@ -25,6 +25,7 @@ export interface LayoutAuthenticationProps<T extends FieldValues> {
   onSubmit: (form: T) => void;
   btnSubmit: string;
   methods: UseFormReturn<T>;
+  isLoading?: boolean;
 }
 
 const FormWrapper = styled.div<FormAuthenticationStyleProps>((props) => ({

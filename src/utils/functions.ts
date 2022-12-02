@@ -2,11 +2,7 @@ export function baseStr(text?: string) {
   return text || "";
 }
 
-export function baseSlug(slug: string, isAuth?: boolean) {
-  if (isAuth) {
-    // return `/auth/${slug}`;
-    return `/${slug}`;
-  }
+export function baseSlug(slug: string) {
   return `/${slug}`;
 }
 
