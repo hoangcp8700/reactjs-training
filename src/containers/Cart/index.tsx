@@ -44,9 +44,8 @@ const CartContainer: React.FC<CartContainerProps> = () => {
 
   const handleCalculationCarts = useCallback(
     (id: string, list: ItemActiveProps[]) => {
-      const abc = { ...carts, [id]: list };
-      setCarts(abc);
-      console.log(carts, id, list, abc);
+      const result = { ...carts, [id]: list };
+      setCarts(result);
     },
     [carts],
   );
