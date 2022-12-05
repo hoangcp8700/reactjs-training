@@ -5,6 +5,7 @@ import Text from "components/atoms/Text";
 import Card from "components/molecules/Card";
 import { CardCartWrapperProps, SkeletonCardCart } from "components/molecules/Card/components/Cart";
 import React, { useCallback, useState } from "react";
+import LazyLoad from "react-lazy-load";
 
 export interface ItemActiveProps {
   id: string;
@@ -118,24 +119,26 @@ const CartSectionItem: React.FC<CartSectionItemProps> = ({
         {carts && carts.list.length && (
           <>
             {carts.list.map((ele, idx) => (
-              <div
-                className={`p-3 relative flex items-center not-last:before:content-[''] not-last:before:absolute not-last:before:bottom-0 not-last:before:right-0 not-last:before:left-0 not-last:before:height-[1px] not-last:before:bg-gray-200 `}
-                key={`cartOrder-section-item-${idx.toString()}`}
-              >
-                <div className='mr-4 max-sm:absolute max-sm:top-[25%] max-sm:translate-y-[-50%]'>
-                  <Checkbox
-                    id='cart-order-item'
-                    checked={activeSelect(ele.id)}
-                    onChange={() => handleItemChange(ele)}
+              <LazyLoad height={180} offset={100} key={`cartOrder-section-item-${idx.toString()}`}>
+                <div
+                  className={`p-3 relative flex items-center not-last:before:content-[''] not-last:before:absolute not-last:before:bottom-0 not-last:before:right-0 not-last:before:left-0 not-last:before:height-[1px] not-last:before:bg-gray-200 `}
+                >
+                  <div className='mr-4 max-sm:absolute max-sm:top-[25%] max-sm:translate-y-[-50%]'>
+                    <Checkbox
+                      id='cart-order-item'
+                      checked={activeSelect(ele.id)}
+                      onChange={() => handleItemChange(ele)}
+                    />
+                  </div>
+
+                  <Card.Cart
+                    {...ele}
+                    handleQuantity={(quantity) =>
+                      onChangeQuantity && onChangeQuantity(id, ele.id, quantity)
+                    }
                   />
                 </div>
-                <Card.Cart
-                  {...ele}
-                  handleQuantity={(quantity) =>
-                    onChangeQuantity && onChangeQuantity(id, ele.id, quantity)
-                  }
-                />
-              </div>
+              </LazyLoad>
             ))}
             {carts.paginate.loading &&
               new Array(5).fill(true).map((_, idx) => (

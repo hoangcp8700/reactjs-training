@@ -35,7 +35,7 @@ const CartOrderContainer: React.FC<CartOrderProps> = (props) => (
           // handleDelete: (id) => console.log("delete", id),
         })),
         paginate: {
-          loading: true,
+          loading: false,
           onMore: (id: string) => console.log("more item of shop:", id),
         },
       },

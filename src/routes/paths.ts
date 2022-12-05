@@ -29,8 +29,9 @@ const TEMPLATE_PAGE: TemplateRouteProps[] = [
   {
     paths: [CONSTANT_ROUTE.EN.CART, CONSTANT_ROUTE.VI.CART],
     component: Cart,
-    private: true,
-    isLogin: true,
+    // NOTE: TRUE
+    private: false,
+    // isLogin: true,
   },
   // authentication
   {

@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import AuthenticateAPI from "api/authentication";
 import { AuthProfileProps } from "api/authentication/type";
 import { getAccessToken, removeAccessToken } from "api/common/storage";
-import Loading from "components/atoms/Loading";
+// import Loading from "components/atoms/Loading";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 type AuthenticateContextType = {
@@ -28,7 +28,7 @@ const AuthenticateProvider: React.FC<AuthenticateProviderProps> = ({ children })
   const [isAuth, setIsAuth] = useState(false);
   const token = useMemo(() => getAccessToken(), []);
 
-  const { mutate: onFetch, isLoading } = useMutation(AuthenticateAPI.PROFILE);
+  const { mutate: onFetch } = useMutation(AuthenticateAPI.PROFILE);
 
   useEffect(() => {
     // FIRST PAGE : CHECK TOKEN
@@ -62,9 +62,9 @@ const AuthenticateProvider: React.FC<AuthenticateProviderProps> = ({ children })
     [isAuth, user],
   );
 
-  if (isLoading) {
-    return <Loading fullScreen />;
-  }
+  // if (isLoading) {
+  //   return <Loading fullScreen />;
+  // }
   return <AuthenticateContext.Provider value={value}>{children}</AuthenticateContext.Provider>;
 };
 

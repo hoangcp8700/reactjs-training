@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { ItemActiveProps } from "components/templates/CartOrder/components/CartSectionItem";
 
 import CartOrderWrapperContainer from "./CartOrderContainer";
+import ProductSimilarContainer from "./ProductSimilarContainer";
 // import CartOrderCheckoutContainer from "./CartOrderCheckout";
 
 interface CartContainerProps {}
@@ -82,7 +83,7 @@ const CartContainer: React.FC<CartContainerProps> = () => {
         priceOrigin={cartsPrice.priceOrigin}
       /> */}
 
-      {/* <ProductSimilarContainer /> */}
+      <ProductSimilarContainer />
     </>
   );
 };
