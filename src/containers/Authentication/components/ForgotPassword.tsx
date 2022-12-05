@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ForgotPasswordFormProps } from "api/authentication/type";
-import FormAuthentication from "components/organisms/FormAuthentication";
+import FormAuthentication from "components/templates/FormAuthentication";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { CONSTANT_ROUTE } from "routes/constants";

@@ -1,12 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ResetPasswordFormProps } from "api/authentication/type";
-import FormAuthentication from "components/organisms/FormAuthentication";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { CONSTANT_ROUTE } from "routes/constants";
 import { baseSlug } from "utils/functions";
 import { IMAGES_CONSTANTS } from "utils/imports";
 import { resetPasswordSchema } from "utils/schemas";
+import FormAuthentication from "components/templates/FormAuthentication";
 
 interface ResetPasswordContainerProps {}
 
@@ -39,13 +39,8 @@ const ResetPasswordContainer: React.FC<ResetPasswordContainerProps> = () => {
       }}
       background={IMAGES_CONSTANTS.LayerAuthentication}
     >
-      <FormAuthentication.ResetPassword
-      methods={methods}
-        btnSubmit='Submit'
-        onSubmit={onSubmit}
-      />
+      <FormAuthentication.ResetPassword methods={methods} btnSubmit='Submit' onSubmit={onSubmit} />
     </FormAuthentication.Layout>
   );
-
-}; 
+};
 export default ResetPasswordContainer;

@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 import AuthenticateAPI from "api/authentication";
 import { LoginFormProps } from "api/authentication/type";
 import { toastSingleMode } from "components/molecules/Toast";
-import FormAuthentication from "components/organisms/FormAuthentication";
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
@@ -15,6 +14,7 @@ import { loginSchema } from "utils/schemas";
 import { SubmitHandler } from "react-hook-form/dist/types";
 import { setAccessToken } from "api/common/storage";
 import { useAuthenticate } from "context/AuthenticateContext";
+import FormAuthentication from "components/templates/FormAuthentication";
 
 interface LoginContainerProps {}
 

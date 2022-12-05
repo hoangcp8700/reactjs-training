@@ -8,12 +8,14 @@ interface SkeletonProps {
   height?: string;
   radius?: string;
   spacing?: string;
+  className?: string;
 }
 interface SkeletonGroupProps {
   children: React.ReactNode;
   isHorizontal?: boolean;
   spacing?: string;
   padding?: string;
+  className?: string;
 }
 
 export const SkeletonGroup: React.FC<SkeletonGroupProps> = ({
@@ -21,9 +23,10 @@ export const SkeletonGroup: React.FC<SkeletonGroupProps> = ({
   spacing,
   padding,
   isHorizontal,
+  className,
 }) => (
   <div
-    className={clsx("skeleton-group", isHorizontal && "flex")}
+    className={clsx("skeleton-group", isHorizontal && "flex", className)}
     style={{
       ...(spacing && { margin: spacing }),
       ...(padding && { padding }),
@@ -33,12 +36,21 @@ export const SkeletonGroup: React.FC<SkeletonGroupProps> = ({
   </div>
 );
 
-const Skeleton: React.FC<SkeletonProps> = ({ variant, width, height, ratio, radius, spacing }) => (
+const Skeleton: React.FC<SkeletonProps> = ({
+  variant,
+  width,
+  height,
+  ratio,
+  radius,
+  spacing,
+  className,
+}) => (
   <div
     className={clsx(
       "skeleton bg-gray-200 rounded-md block overflow-hidden relative duration-300 ease-in-out before:content-[''] before:absolute before:inset-y-0 before:inset-x-[-150%] before:bg-skeleton before:animate-skeleton",
       variant === "circle" && "rounded-full",
       variant === "square" && "rounded-0",
+      className,
     )}
     style={{
       ...(!ratio && {

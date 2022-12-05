@@ -4,7 +4,6 @@ import AuthenticateAPI from "api/authentication";
 import { RegisterFormProps } from "api/authentication/type";
 import { toastDismiss, toastSingleMode } from "components/molecules/Toast";
 import ActionToast from "components/molecules/Toast/Action";
-import FormAuthentication from "components/organisms/FormAuthentication";
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
@@ -14,6 +13,7 @@ import { ERROR_GENERAL } from "utils/constants";
 import { baseSlug } from "utils/functions";
 import { IMAGES_CONSTANTS } from "utils/imports";
 import { registerSchema } from "utils/schemas";
+import FormAuthentication from "components/templates/FormAuthentication";
 
 interface RegisterContainerProps {}
 
