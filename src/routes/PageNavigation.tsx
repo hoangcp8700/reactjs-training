@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Error from "pages/Error";
 import Loading from "components/atoms/Loading";
-import { useAuthenticate } from "context/AuthenticateContext";
-import { baseSlug } from "utils/functions";
 
-import TEMPLATE_PAGE, { RoutePathItemProps } from "./paths";
-import { CONSTANT_ROUTE } from "./constants";
-
-// NOTE: important!!!
-const langCurrent = "VI";
+import TEMPLATE_PAGE, { TemplateRouteProps } from "./paths";
+import PublicRoute, { PrivateRoute } from "./hook";
 
 const PageNavigation: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { isAuth } = useAuthenticate();
-  const location = useLocation();
-
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [pageData, setPageData] = useState<RoutePathItemProps>();
+  const [pageData, setPageData] = useState<TemplateRouteProps>();
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -45,26 +37,11 @@ const PageNavigation: React.FC = () => {
     return <Error statusCode={404} title='Page Not Found' />;
   }
 
-  // page is private + need check authenticate and not login => redirect login
-  // ex: Cart page
-  if (pageData.private && pageData.authenticate && !isAuth) {
-    return (
-      <Navigate
-        to={`/${CONSTANT_ROUTE[langCurrent].LOGIN}`}
-        // check for page need authenticate => login => redirect path before
-        state={{ from: baseSlug(pageData.paths[langCurrent === "VI" ? 1 : 0]) }}
-        replace
-      />
-    );
+  // NOTE: PUBLIC AND PRIVATE ROUTE
+  if (pageData.private) {
+    return <PrivateRoute {...pageData} />;
   }
-
-  // page is public + need check authenticate and have isAuth => redirect home
-  // ex: Login page
-  if (!pageData.private && pageData.authenticate && isAuth) {
-    return <Navigate to={location.pathname || "/"} replace />;
-  }
-
-  return React.createElement(pageData.component);
+  return <PublicRoute {...pageData} />;
 };
 
 export default PageNavigation;

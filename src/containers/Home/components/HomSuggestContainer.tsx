@@ -105,10 +105,11 @@ const HomeSuggestContainer: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slugCategory, tabsDummy]);
 
-  const randomProductData = useMemo(() => 
-     getShuffledArr<CardProductProps>(productData)
+  const randomProductData = useMemo(
+    () => getShuffledArr<CardProductProps>(productData),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  , [tabActive, productData]);
+    [tabActive, productData],
+  );
 
   const handleChangeTab = useCallback(
     (tab: number) => {

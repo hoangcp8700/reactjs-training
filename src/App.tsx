@@ -35,6 +35,8 @@ const App = () => (
         {CONSTANT_LANGUAGE_LIST?.map((ele, index) => {
           const prefix = ele.toLowerCase();
           return (
+            // VI: /gio-hang
+            // EN: /en/carts
             <Route key={`route-${index.toString()}`} path={prefix === "vi" ? "" : prefix}>
               <Route index element={<HomePage />} />
               <Route path=':slug' element={<PageNavigation />} />

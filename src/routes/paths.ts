@@ -12,14 +12,15 @@ const Login = lazy(() => import("pages/Authentication/Login"));
 const Register = lazy(() => import("pages/Authentication/Register"));
 const ForgotPassword = lazy(() => import("pages/Authentication/ForgotPassword"));
 const ResetPassword = lazy(() => import("pages/Authentication/ResetPassword"));
-export interface RoutePathItemProps {
+
+export interface TemplateRouteProps {
   paths: string[];
   component: React.LazyExoticComponent<React.ComponentType<any>>;
   private: boolean;
-  authenticate?: boolean;
+  isLogin?: boolean; // check page login != page other || login != carts
 }
 // eg: ['about-us', 've-chung-toi']
-const TEMPLATE_PAGE: RoutePathItemProps[] = [
+const TEMPLATE_PAGE: TemplateRouteProps[] = [
   {
     paths: [CONSTANT_ROUTE.EN.ABOUT_US, CONSTANT_ROUTE.VI.ABOUT_US],
     component: AboutUs,
@@ -29,7 +30,7 @@ const TEMPLATE_PAGE: RoutePathItemProps[] = [
     paths: [CONSTANT_ROUTE.EN.CART, CONSTANT_ROUTE.VI.CART],
     component: Cart,
     private: true,
-    authenticate: true,
+    isLogin: true,
   },
   // authentication
   {
@@ -41,7 +42,7 @@ const TEMPLATE_PAGE: RoutePathItemProps[] = [
     paths: [CONSTANT_ROUTE.EN.LOGIN, CONSTANT_ROUTE.VI.LOGIN],
     component: Login,
     private: false,
-    authenticate: true,
+    isLogin: true,
   },
   {
     paths: [CONSTANT_ROUTE.EN.REGISTER, CONSTANT_ROUTE.VI.REGISTER],
