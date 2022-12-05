@@ -7,26 +7,35 @@ import { AuthProfileProps, LoginFormProps, LoginSuccessProps, RegisterFormProps 
 const concatAuth = (slug: string) => `${proxyAPI}${slug}`;
 
 // eslint-disable-next-line consistent-return
-export const fakeLogin = (data: LoginFormProps) => {
-  if (data.userName === "admin" && data.password === "123") {
-    return {
-      data: {
-        accessToken: "123123123112312312321",
-      },
-      message: {
-        VI: "Đăng nhập thành công",
-        EN: "Login success",
-      },
-    };
-  }
-};
+export const fakeLogin = () => ({
+  data: {
+    accessToken: "123123123112312312321",
+  },
+  message: {
+    VI: "Đăng nhập thành công",
+    EN: "Login success",
+  },
+});
+export const fakeProfile = () => ({
+  data: {
+    data: {
+      avatar: "",
+      email: "hoangcp219@gmail.com",
+      fullName: "Hoang Cong Phan",
+      phone: "09312312312",
+      userName: "hoangcp219",
+      _id: "12312321321",
+    },
+  },
+});
 const AuthenticateAPI = {
   PROFILE: async (): Promise<AuthProfileProps> => {
-    const response = await axiosInstance.get(concatAuth("/auth/user"));
+    const response = fakeProfile();
+    // const response = await axiosInstance.get(concatAuth("/auth/user"));
     return response.data.data;
   },
   LOGIN: async (data: LoginFormProps): Promise<ResponseAPIType<LoginSuccessProps>> => {
-    // fakeLogin(data);
+    return fakeLogin();
 
     const formData = new FormData();
 
