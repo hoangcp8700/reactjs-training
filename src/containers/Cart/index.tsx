@@ -53,7 +53,6 @@ const CartContainer: React.FC<CartContainerProps> = () => {
 
   const handleChangeQuantity = useCallback(
     (id: string, itemID: string, quantity: number) => {
-      console.log("runn", carts);
       // TODO: WIP
 
       if (carts) {

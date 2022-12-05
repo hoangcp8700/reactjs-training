@@ -18,7 +18,7 @@ export interface ProductSimilarProps {
 const ProductSimilar: React.FC<ProductSimilarProps> = ({ title, link, lists }) => (
   <div className='t-productSimilar mt-10'>
     <Container>
-      <div className='flex justify-between items-center sm:px-2 mb-2'>
+      <div className='flex justify-between items-center sm:px-2 mb-4'>
         <div className='mr-4'>
           <Heading className='uppercase'>{title}</Heading>
         </div>
