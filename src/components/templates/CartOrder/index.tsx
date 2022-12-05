@@ -24,7 +24,7 @@ const CartOrder: React.FC<CartOrderProps> = ({ list, paginate, onSelect, onChang
   const { setNode } = useScrollInfinite(paginate?.onMore);
 
   return (
-    <div className='t-cartOrder bg-gray-300/70'>
+    <div className='t-cartOrder'>
       <Container>
         <div className='t-cartOrder_wrapper'>
           <div className='t-cartOrder_wrapCarts relative'>
