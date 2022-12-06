@@ -1,4 +1,4 @@
-import { useAuthenticate } from "context/AuthenticateContext";
+import useAuth from "hooks/useAuth";
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { baseSlug } from "utils/functions";
@@ -9,7 +9,7 @@ import { TemplateRouteProps } from "./paths";
 const langCurrent = "VI";
 
 export const PrivateRoute: React.FC<TemplateRouteProps> = ({ paths, component }) => {
-  const { isAuth } = useAuthenticate();
+  const { isAuth } = useAuth();
   if (!isAuth) {
     return (
       <Navigate
@@ -24,7 +24,7 @@ export const PrivateRoute: React.FC<TemplateRouteProps> = ({ paths, component })
 };
 
 const PublicRoute: React.FC<TemplateRouteProps> = ({ isLogin, component }) => {
-  const { isAuth } = useAuthenticate();
+  const { isAuth } = useAuth();
   const location = useLocation();
 
   // redirect login page when have isAuth => redirect path before

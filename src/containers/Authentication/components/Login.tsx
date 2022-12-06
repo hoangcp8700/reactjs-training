@@ -12,9 +12,8 @@ import { baseSlug } from "utils/functions";
 import { IMAGES_CONSTANTS } from "utils/imports";
 import { loginSchema } from "utils/schemas";
 import { SubmitHandler } from "react-hook-form/dist/types";
-import { setAccessToken } from "api/common/storage";
-import { useAuthenticate } from "context/AuthenticateContext";
 import FormAuthentication from "components/templates/FormAuthentication";
+import useAuth from "hooks/useAuth";
 
 interface LoginContainerProps {}
 
@@ -24,6 +23,7 @@ const LoginContainer: React.FC<LoginContainerProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const { handleLogin } = useAuth();
 
   useEffect(() => {
     if (location.state?.from) {
@@ -36,8 +36,6 @@ const LoginContainer: React.FC<LoginContainerProps> = () => {
     () => searchParams.get("next") || baseSlug(CONSTANT_ROUTE[language].HOME),
     [searchParams],
   );
-
-  const { login } = useAuthenticate();
 
   const methods = useForm<UseFormHookType<LoginFormProps>>({
     defaultValues: {
@@ -54,8 +52,7 @@ const LoginContainer: React.FC<LoginContainerProps> = () => {
     (data: LoginFormProps) => {
       handleSubmit(data, {
         onSuccess: (res) => {
-          login();
-          setAccessToken(res.data.accessToken);
+          handleLogin(res.data.accessToken);
           methods.reset();
           toastSingleMode({
             message: "Đăng nhập thành công",
@@ -84,7 +81,7 @@ const LoginContainer: React.FC<LoginContainerProps> = () => {
         },
       });
     },
-    [redirectLocationBefore, methods, login, navigate, handleSubmit],
+    [handleSubmit, handleLogin, methods, navigate, redirectLocationBefore],
   );
 
   return (
