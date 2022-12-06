@@ -32,4 +32,6 @@ export const exampleSlice = createSlice({
 
 export const { addTodo, removeTodo } = exampleSlice.actions;
 
+export const useExampleActionHook = () => ({ ...exampleSlice.actions });
+
 export default exampleSlice.reducer;

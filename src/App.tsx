@@ -21,6 +21,8 @@ const ProductDetailPage = React.lazy(() => import("pages/ProductDetail"));
 const HomePage = React.lazy(() => import("pages/Home"));
 const PageNavigation = React.lazy(() => import("routes/PageNavigation"));
 
+const TestSagaPage = React.lazy(() => import("pages/TestSaga"));
+
 const App = () => (
   <Suspense fallback={<Loading fullScreen />}>
     <Routes>
@@ -32,6 +34,8 @@ const App = () => (
           </Layout>
         }
       >
+        <Route path='test-saga' element={<TestSagaPage />} />
+
         {CONSTANT_LANGUAGE_LIST?.map((ele, index) => {
           const prefix = ele.toLowerCase();
           return (
