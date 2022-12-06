@@ -3,18 +3,14 @@ import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import exampleReducer from "./example";
-import counterReducer from "./counter";
 import { rootSaga } from "./rootSaga";
+import rootReducer from "./rootReducer";
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   devTools: process.env.NODE_ENV === "development",
-  reducer: {
-    example: exampleReducer,
-    counter: counterReducer,
-  },
+  reducer: rootReducer(),
   middleware: (getDefaultMiddleWare) =>
     getDefaultMiddleWare({
       thunk: false,

@@ -18,7 +18,6 @@ export const counterSlice = createSlice({
       $state.isLoading = action.payload;
     },
     INCREMENT($state: CounterState, action: PayloadAction<number>) {
-      console.log("runnn latest");
       $state.count += action.payload;
     },
     DECREMENT($state: CounterState, action: PayloadAction<number>) {
