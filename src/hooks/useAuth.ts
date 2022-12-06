@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 import AuthenticateAPI from "api/authentication";
 import { useAuthenticate } from "context/AuthenticateContext";
@@ -11,12 +11,13 @@ const language = "VI";
 
 const useAuth = () => {
   const { user, isAuth, updateAuth, updateUser } = useAuthenticate();
-  const token = useMemo(() => getAccessToken(), []);
   const navigate = useNavigate();
 
   const { mutate: onFetchProfile, isLoading } = useMutation(AuthenticateAPI.PROFILE);
 
   const handleProfile = useCallback(() => {
+    const token = getAccessToken();
+
     if (token) {
       onFetchProfile(undefined, {
         onSuccess: (res) => {
@@ -25,7 +26,7 @@ const useAuth = () => {
         },
       });
     }
-  }, [token, onFetchProfile, updateAuth, updateUser]);
+  }, [onFetchProfile, updateAuth, updateUser]);
 
   const handleLogin = useCallback(
     (accessToken: string) => {
