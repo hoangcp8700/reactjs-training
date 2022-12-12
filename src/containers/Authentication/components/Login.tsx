@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import AuthenticateAPI from "api/authentication";
@@ -62,7 +63,6 @@ const LoginContainer: React.FC<LoginContainerProps> = () => {
           });
           navigate(redirectLocationBefore);
         },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error: any) => {
           if (error) {
             console.log("login submit", error);

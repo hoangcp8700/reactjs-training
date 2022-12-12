@@ -13,11 +13,14 @@ export function* incrementAsync(action: PayloadAction<number>) {
   yield put(INCREMENT(action.payload || 1));
   yield put(TOGGLE_LOADING(false));
 }
+
 function* watcherIncrementAsync() {
   yield takeLatest(INCREMENT_ASYNC.toString(), incrementAsync);
-  // yield takeEvery(INCREMENT_ASYNC.toString(), incrementAsync);
 }
 
 export default function* counterSaga() {
-  yield all([fork(watcherIncrementAsync)]);
+  yield all([
+    fork(watcherIncrementAsync),
+    // fork(watcherIncrementAsync)
+  ]);
 }
